@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          如何实现C/C++与Python程序之间通信 - 张嘉伟 | Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://www.tracy.store/article/如何实现C-C-与Python的通信？/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('./home.png')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                            
+                              <a class="tag" href="/tags/#C/C++" title="C/C++">C/C++</a>
+                            
+                        </div>
+                        <h1>如何实现C/C++与Python程序之间通信</h1>
+                        <h2 class="subheading">C/C++与Python通信</h2>
+                        <span class="meta">
+                            Posted by 张嘉伟 on
+                            2019-11-21
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">张嘉伟</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photos/">Photos</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>属于混合编程的问题。较全面的介绍一下，不仅限于题主提出的问题。<br>
+以下讨论中，Python指它的标准实现，即CPython（虽然不是很严格）</p>
+<h2 id="本文结构">本文结构</h2>
+<ul>
+<li>C/C++ 调用 Python （基础篇）— 仅讨论Python官方提供的实现方式</li>
+<li>Python 调用 C/C++ （基础篇）— 仅讨论Python官方提供的实现方式</li>
+<li>C/C++ 调用 Python （高级篇）— 使用 Cython</li>
+<li>Python 调用 C/C++ （高级篇）— 使用 SWIG</li>
+</ul>
+<p>练习本文中的例子，需要搭建Python扩展开发环境。具体细节见<a href="https://links.jianshu.com/go?to=http%3A%2F%2Fzhuanlan.zhihu.com%2Fpython-dev%2F20150730" target="_blank" rel="noopener">搭建Python扩展开发环境 - 蛇之魅惑 - 知乎专栏</a></p>
+<h2 id="cc-调用-python基础篇">C/C++ 调用 Python（基础篇）</h2>
+<p>Python 本身就是一个C库。你所看到的可执行体python只不过是个stub。真正的python实体在动态链接库里实现，在Windows平台上，这个文件位于 %SystemRoot%\System32\python27.dll。</p>
+<p>你也可以在自己的程序中调用Python，看起来非常容易：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//my_python.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Python.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  Py_SetProgramName(argv[<span class="number">0</span>]);</span><br><span class="line">  Py_Initialize();</span><br><span class="line">  PyRun_SimpleString(<span class="string">"print 'Hello Python!'\n"</span>);</span><br><span class="line">  Py_Finalize();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在Windows平台下，打开Visual Studio命令提示符，编译命令为</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cl my_python.c -IC:\Python27\include C:\Python27\libs\python27.lib</span><br></pre></td></tr></table></figure>
+<p>在Linux下编译命令为</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc my_python.c -o my_python -I/usr/include/python2<span class="number">.7</span>/ -lpython2<span class="number">.7</span></span><br></pre></td></tr></table></figure>
+<p>在Mac OS X 下的编译命令同上</p>
+<p>产生可执行文件后，直接运行，结果为输出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello Python!</span><br></pre></td></tr></table></figure>
+<p>Python库函数PyRun_SimpleString可以执行字符串形式的Python代码。</p>
+<p>虽然非常简单，但这段代码除了能用C语言动态生成一些Python代码之外，并没有什么用处。我们需要的是C语言的数据结构能够和Python交互。</p>
+<p>下面举个例子，比如说，有一天我们用Python写了一个功能特别强大的函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">great_function</span><span class="params">(a)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> a + <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>接下来要把它包装成C语言的函数。我们期待的C语言的对应函数应该是这样的：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">great_function_from_python</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res; </span><br><span class="line">    <span class="comment">// some magic</span></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先，复用Python模块得做‘import’，这里也不例外。所以我们把great_function放到一个module里，比如说，这个module名字叫 great_module.py</p>
+<p>接下来就要用C来调用Python了，完整的代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Python.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">great_function_from_python</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res;</span><br><span class="line">    PyObject *pModule,*pFunc;</span><br><span class="line">    PyObject *pArgs, *pValue;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* import */</span></span><br><span class="line">    pModule = PyImport_Import(PyString_FromString(<span class="string">"great_module"</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* great_module.great_function */</span></span><br><span class="line">    pFunc = PyObject_GetAttrString(pModule, <span class="string">"great_function"</span>); </span><br><span class="line"></span><br><span class="line">    <span class="comment">/* build args */</span></span><br><span class="line">    pArgs = PyTuple_New(<span class="number">1</span>);</span><br><span class="line">    PyTuple_SetItem(pArgs,<span class="number">0</span>, PyInt_FromLong(a));</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* call */</span></span><br><span class="line">    pValue = PyObject_CallObject(pFunc, pArgs);</span><br><span class="line"></span><br><span class="line">    res = PyInt_AsLong(pValue);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从上述代码可以窥见Python内部运行的方式：</p>
+<ul>
+<li>所有Python元素，module、function、tuple、string等等，实际上都是PyObject。C语言里操纵它们，一律使用PyObject *。</li>
+<li>Python的类型与C语言类型可以相互转换。Python类型XXX转换为C语言类型YYY要使用PyXXX_AsYYY函数；C类型YYY转换为Python类型XXX要使用PyXXX_FromYYY函数。</li>
+<li>也可以创建Python类型的变量，使用PyXXX_New可以创建类型为XXX的变量。</li>
+<li>若a是Tuple，则a[i] = b对应于 PyTuple_SetItem(a,i,b)，有理由相信还有一个函数PyTuple_GetItem完成取得某一项的值。</li>
+<li>不仅Python语言很优雅，Python的库函数API也非常优雅。</li>
+</ul>
+<p>现在我们得到了一个C语言的函数了，可以写一个main测试它</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Python.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">great_function_from_python</span><span class="params">(<span class="keyword">int</span> a)</span></span>; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    Py_Initialize();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,great_function_from_python(<span class="number">2</span>));</span><br><span class="line">    Py_Finalize();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译的方式就用本节开头使用的方法。</p>
+<p>在Linux/Mac OSX运行此示例之前，可能先需要设置环境变量：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">bash:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">export</span> PYTHONPATH=.:$PYTHONPATH</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">csh:</span><br><span class="line"></span><br><span class="line">    setenv PYTHONPATH .:$PYTHONPATH</span><br></pre></td></tr></table></figure>
+<h2 id="python-调用-cc基础篇">Python 调用 C/C++（基础篇）</h2>
+<p>这种做法称为Python扩展。<br>
+比如说，我们有一个功能强大的C函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">great_function</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>期望在Python里这样使用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> great_module <span class="keyword">import</span> great_function </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>great_function(<span class="number">2</span>)</span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p>考虑最简单的情况。我们把功能强大的函数放入C文件 great_module.c 中。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Python.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">great_function</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> PyObject * _great_function(PyObject *self, PyObject *args)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> _a;</span><br><span class="line">    <span class="keyword">int</span> res;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!PyArg_ParseTuple(args, <span class="string">"i"</span>, &amp;_a))</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    res = great_function(_a);</span><br><span class="line">    <span class="keyword">return</span> PyLong_FromLong(res);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> PyMethodDef GreateModuleMethods[] = &#123;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"great_function"</span>,</span><br><span class="line">        _great_function,</span><br><span class="line">        METH_VARARGS,</span><br><span class="line">        <span class="string">""</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;<span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">PyMODINIT_FUNC <span class="title">initgreat_module</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    (<span class="keyword">void</span>) Py_InitModule(<span class="string">"great_module"</span>, GreateModuleMethods);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>除了功能强大的函数great_function外，这个文件中还有以下部分：</p>
+<ul>
+<li>包裹函数_great_function。它负责将Python的参数转化为C的参数（PyArg_ParseTuple），调用实际的great_function，并处理great_function的返回值，最终返回给Python环境。</li>
+<li>导出表GreateModuleMethods。它负责告诉Python这个模块里有哪些函数可以被Python调用。导出表的名字可以随便起，每一项有4个参数：第一个参数是提供给Python环境的函数名称，第二个参数是_great_function，即包裹函数。第三个参数的含义是参数变长，第四个参数是一个说明性的字符串。导出表总是以{NULL, NULL, 0, NULL}结束。</li>
+<li>导出函数initgreat_module。这个的名字不是任取的，是你的module名称添加前缀init。导出函数中将模块名称与导出表进行连接。</li>
+</ul>
+<p>在Windows下面，在Visual Studio命令提示符下编译这个文件的命令是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cl /LD great_module.c /o great_module.pyd -IC:\Python27\include C:\Python27\libs\python27.lib</span><br></pre></td></tr></table></figure>
+<p>/LD 即生成动态链接库。编译成功后在当前目录可以得到 great_module.pyd（实际上是dll）。这个pyd可以在Python环境下直接当作module使用。</p>
+<p>在Linux下面，则用gcc编译：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -fPIC -shared great_module.c -o great_module.so -I/usr/include/python2.7/ -lpython2.7</span><br></pre></td></tr></table></figure>
+<p>在当前目录下得到great_module.so，同理可以在Python中直接使用。</p>
+<p><strong>本部分参考资料</strong></p>
+<ul>
+<li>《Python源码剖析-深度探索动态语言核心技术》是系统介绍CPython实现以及运行原理的优秀教程。</li>
+<li>Python 官方文档的这一章详细介绍了C/C++与Python的双向互动<a href="https://links.jianshu.com/go?to=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%253A%2F%2Fdocs.python.org%2F2%2Fextending%2Findex.html%2523extending-index" target="_blank" rel="noopener">Extending and Embedding the Python Interpreter</a></li>
+<li>关于编译环境，本文所述方法仅为出示原理所用。规范的方式如下：<a href="https://links.jianshu.com/go?to=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%253A%2F%2Fdocs.python.org%2F2%2Fextending%2Fbuilding.html%2523building" target="_blank" rel="noopener">3. Building C and C++ Extensions with distutils</a></li>
+<li>作为字典使用的官方参考文档 <a href="https://links.jianshu.com/go?to=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%253A%2F%2Fdocs.python.org%2F2%2Fc-api%2Findex.html%2523c-api-index" target="_blank" rel="noopener">Python/C API Reference Manual</a></li>
+</ul>
+<p>用以上的方法实现C/C++与Python的混合编程，需要对Python的内部实现有相当的了解。接下来介绍当前较为成熟的技术Cython和SWIG。</p>
+<h2 id="cc-调用-python使用cython">C/C++ 调用 Python（使用Cython）</h2>
+<p>在前面的小节中谈到，Python的数据类型和C的数据类型貌似是有某种“一一对应”的关系的，此外，由于Python（确切的说是CPython）本身是由C语言实现的，故Python数据类型之间的函数运算也必然与C语言有对应关系。那么，有没有可能“自动”的做替换，把Python代码直接变成C代码呢？答案是肯定的，这就是Cython主要解决的问题。</p>
+<p>安装Cython非常简单。Python 2.7.9以上的版本已经自带easy_install：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">easy_install -U cython</span><br></pre></td></tr></table></figure>
+<p>在Windows环境下依然需要Visual Studio，由于安装的过程需要编译Cython的源代码，故上述命令需要在Visual Studio命令提示符下完成。一会儿使用Cython的时候，也需要在Visual Studio命令提示符下进行操作，这一点和第一部分的要求是一样的。</p>
+<p>继续以例子说明：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#great_module.pyx</span><br><span class="line">cdef public great_function(a,index):</span><br><span class="line">    <span class="keyword">return</span> a[index]</span><br></pre></td></tr></table></figure>
+<p>这其中有非Python关键字cdef和public。这些关键字属于Cython。由于我们需要在C语言中使用“编译好的Python代码”，所以得让great_function从外面变得可见，方法就是以“public”修饰。而cdef类似于Python的def，只有使用cdef才可以使用Cython的关键字public。</p>
+<p>这个函数中其他的部分与正常的Python代码是一样的。</p>
+<p>接下来编译 great_module.pyx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cython great_module.pyx</span><br></pre></td></tr></table></figure>
+<p>得到great_module.h和great_module.c。打开great_module.h可以找到这样一句声明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__PYX_EXTERN_C DL_IMPORT(PyObject) *great_function(PyObject *, PyObject *)</span><br></pre></td></tr></table></figure>
+<p>写一个main使用great_function。注意great_function并不规定a是何种类型，它的功能只是提取a的第index的成员而已，故使用great_function的时候，a可以传入Python String，也可以传入tuple之类的其他可迭代类型。仍然使用之前提到的类型转换函数PyXXX_FromYYY和PyXXX_AsYYY。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//main.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Python.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"great_module.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    PyObject *tuple;</span><br><span class="line">    Py_Initialize();</span><br><span class="line">    initgreat_module();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>,PyString_AsString(</span><br><span class="line">                great_function(</span><br><span class="line">                    PyString_FromString(<span class="string">"hello"</span>),</span><br><span class="line">                    PyInt_FromLong(<span class="number">1</span>)</span><br><span class="line">                )</span><br><span class="line">            ));</span><br><span class="line">    tuple = Py_BuildValue(<span class="string">"(iis)"</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="string">"three"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,PyInt_AsLong(</span><br><span class="line">                great_function(</span><br><span class="line">                    tuple,</span><br><span class="line">                    PyInt_FromLong(<span class="number">1</span>)</span><br><span class="line">                )</span><br><span class="line">            ));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>,PyString_AsString(</span><br><span class="line">                great_function(</span><br><span class="line">                    tuple,</span><br><span class="line">                    PyInt_FromLong(<span class="number">2</span>)</span><br><span class="line">                )</span><br><span class="line">            ));</span><br><span class="line">    Py_Finalize();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译命令和第一部分相同：<br>
+在Windows下编译命令为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cl main.c great_module.c -IC:\Python27\include C:\Python27\libs\python27.lib</span><br></pre></td></tr></table></figure>
+<p>在Linux下编译命令为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc main.c great_module.c -o main -I/usr/include/python2.7/ -lpython2.7</span><br></pre></td></tr></table></figure>
+<p>这个例子中我们使用了Python的动态类型特性。如果你想指定类型，可以利用Cython的静态类型关键字。例子如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#great_module.pyx</span><br><span class="line">cdef public char great_function(const char * a,int index):</span><br><span class="line">    <span class="keyword">return</span> a[index]</span><br></pre></td></tr></table></figure>
+<p>cython编译后得到的.h里，great_function的声明是这样的：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__<span class="function">PYX_EXTERN_C <span class="title">DL_IMPORT</span><span class="params">(<span class="keyword">char</span>)</span> <span class="title">great_function</span><span class="params">(<span class="keyword">char</span> <span class="keyword">const</span> *, <span class="keyword">int</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>很开心对不对！<br>
+这样的话，我们的main函数已经几乎看不到Python的痕迹了：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//main.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Python.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"great_module.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    Py_Initialize();</span><br><span class="line">    initgreat_module();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%c"</span>,great_function(<span class="string">"Hello"</span>,<span class="number">2</span>));</span><br><span class="line">    Py_Finalize();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这一部分的最后我们给一个看似实用的应用（仅限于Windows）：<br>
+还是利用刚才的great_module.pyx，准备一个dllmain.c：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Python.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"great_module.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> __declspec(dllexport) <span class="keyword">int</span> __stdcall _great_function(<span class="keyword">const</span> <span class="keyword">char</span> * a, <span class="keyword">int</span> b) &#123;</span><br><span class="line">    <span class="keyword">return</span> great_function(a,b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">BOOL WINAPI <span class="title">DllMain</span><span class="params">(HINSTANCE hinstDLL,DWORD fdwReason,LPVOID lpReserved)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span>( fdwReason ) &#123; </span><br><span class="line">        <span class="keyword">case</span> DLL_PROCESS_ATTACH:</span><br><span class="line">            Py_Initialize();</span><br><span class="line">            initgreat_module();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> DLL_PROCESS_DETACH:</span><br><span class="line">            Py_Finalize();</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> TRUE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在Visual Studio命令提示符下编译：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cl /LD dllmain.c great_module.c -IC:\Python27\include C:\Python27\libs\python27.lib</span><br></pre></td></tr></table></figure>
+<p>会得到一个dllmain.dll。我们在Excel里面使用它，没错，传说中的<strong>Excel与Python混合编程</strong>：</p>
+<p><noscript><img data-rawheight="797" data-rawwidth="1007" src="https://pic2.zhimg.com/50/2f45c9f2f8407d46f51f203efc2e8181\_hd.jpg" class="origin\_image zh-lightbox-thumb" width="1007" data-original="https://pic2.zhimg.com/2f45c9f2f8407d46f51f203efc2e8181_r.jpg"></noscript></p>
+<p><img src="//upload-images.jianshu.io/upload_images/12778909-433d2ab7e4a6af72.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/720/format/webp" alt=""></p>
+<p>参考资料：Cython的官方文档，质量非常高：<br>
+<a href="https://links.jianshu.com/go?to=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttp%253A%2F%2Fdocs.cython.org%2Findex.html" target="_blank" rel="noopener">Welcome to Cython’s Documentation</a></p>
+<h2 id="python调用cc使用swig">Python调用C/C++（使用SWIG）</h2>
+<p>用C/C++对脚本语言的功能扩展是非常常见的事情，Python也不例外。除了SWIG，市面上还有若干用于Python扩展的工具包，比较知名的还有Boost.Python、SIP等，此外，Cython由于可以直接集成C/C++代码，并方便的生成Python模块，故也可以完成扩展Python的任务。</p>
+<p>答主在这里选用SWIG的一个重要原因是，它不仅可以用于Python，也可以用于其他语言。如今SWIG已经支持C/C++的好基友Java，主流脚本语言Python、Perl、Ruby、PHP、JavaScript、tcl、Lua，还有Go、C#，以及R。SWIG是基于配置的，也就是说，原则上一套配置改变不同的编译方法就能适用各种语言（当然，这是理想情况了……）</p>
+<p>SWIG的安装方便，有Windows的预编译包，解压即用，绿色健康。主流Linux通常集成swig的包，也可以下载源代码自己编译，SWIG非常小巧，通常安装不会出什么问题。</p>
+<p>用SWIG扩展Python，你需要有一个待扩展的C/C++库。这个库有可能是你自己写的，也有可能是某个项目提供的。这里举一个不浮夸的例子：希望在Python中用到SSE4指令集的CRC32指令。</p>
+<p>首先打开指令集的文档：<a href="https://links.jianshu.com/go?to=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%253A%2F%2Fsoftware.intel.com%2Fen-us%2Fnode%2F514245" target="_blank" rel="noopener">https://software.intel.com/en-us/node/514245</a><br>
+可以看到有6个函数。分析6个函数的原型，其参数和返回值都是简单的整数。于是书写SWIG的配置文件（为了简化起见，未包含2个64位函数）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* File: mymodule.i */</span></span><br><span class="line">%<span class="keyword">module</span> mymodule</span><br><span class="line"></span><br><span class="line">%&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"nmmintrin.h"</span></span></span><br><span class="line">%&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> _mm_popcnt_u32(<span class="keyword">unsigned</span> <span class="keyword">int</span> v);</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> _mm_crc32_u8 (<span class="keyword">unsigned</span> <span class="keyword">int</span> crc, <span class="keyword">unsigned</span> <span class="keyword">char</span> v);</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> _mm_crc32_u16(<span class="keyword">unsigned</span> <span class="keyword">int</span> crc, <span class="keyword">unsigned</span> <span class="keyword">short</span> v);</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> _mm_crc32_u32(<span class="keyword">unsigned</span> <span class="keyword">int</span> crc, <span class="keyword">unsigned</span> <span class="keyword">int</span> v);</span><br></pre></td></tr></table></figure>
+<p>接下来使用SWIG将这个配置文件编译为所谓Python Module Wrapper</p>
+<pre><code>swig -python mymodule.i
+</code></pre>
+<p>得到一个 mymodule_wrap.c和一个mymodule.py。把它编译为Python扩展：</p>
+<p>Windows：</p>
+<pre><code>cl /LD mymodule_wrap.c /o _mymodule.pyd -IC:\Python27\include C:\Python27\libs\python27.lib
+</code></pre>
+<p>Linux：</p>
+<pre><code>gcc -fPIC -shared mymodule_wrap.c -o _mymodule.so -I/usr/include/python2.7/ -lpython2.7
+</code></pre>
+<p>注意输出文件名前面要加一个下划线。<br>
+现在可以立即在Python下使用这个module了：</p>
+<pre><code>&gt;&gt;&gt; import mymodule
+&gt;&gt;&gt; mymodule._mm_popcnt_u32(10)
+2
+</code></pre>
+<p>回顾这个配置文件分为3个部分：</p>
+<ul>
+<li>定义module名称mymodule，通常，module名称要和文件名保持一致。</li>
+<li>%{ %} 包裹的部分是C语言的代码，这段代码会原封不动的复制到mymodule_wrap.c</li>
+<li>欲导出的函数签名列表。直接从头文件里复制过来即可。</li>
+</ul>
+<p>还记得本文第2节的那个great_function吗？有了SWIG，事情就会变得如此简单：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* great_module.i */</span></span><br><span class="line">%<span class="keyword">module</span> great_module</span><br><span class="line">%&#123;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">great_function</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">%&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">great_function</span><span class="params">(<span class="keyword">int</span> a)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>换句话说，SWIG自动完成了诸如Python类型转换、module初始化、导出代码表生成的诸多工作。</p>
+<p>对于C++，SWIG也可以应对。例如以下代码有C++类的定义：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//great_class.h</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> GREAT_CLASS</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> GREAT_CLASS</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Great</span> &#123;</span></span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">        <span class="keyword">int</span> s;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">setWall</span> <span class="params">(<span class="keyword">int</span> _s)</span> </span>&#123;s = _s;&#125;;</span><br><span class="line">        <span class="function"><span class="keyword">int</span> <span class="title">getWall</span> <span class="params">()</span> </span>&#123;<span class="keyword">return</span> s;&#125;;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// GREAT_CLASS</span></span></span><br></pre></td></tr></table></figure>
+<p>对应的SWIG配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/* great_class.i */</span><br><span class="line">%module great_class</span><br><span class="line">%&#123;</span><br><span class="line">#include &quot;great_class.h&quot;</span><br><span class="line">%&#125;</span><br><span class="line">%include &quot;great_class.h&quot;</span><br></pre></td></tr></table></figure>
+<p>这里不再重新敲一遍class的定义了，直接使用SWIG的%include指令</p>
+<p>SWIG编译时要加-c++这个选项，生成的扩展名为cxx</p>
+<pre><code>swig -c++ -python great_class.i
+</code></pre>
+<p>Windows下编译：</p>
+<pre><code>cl /LD great_class_wrap.cxx /o _great_class.pyd -IC:\Python27\include C:\Python27\libs\python27.lib
+</code></pre>
+<p>Linux，使用C++的编译器</p>
+<pre><code>g++ -fPIC -shared great_class_wrap.cxx -o _great_class.so  -I/usr/include/python2.7/ -lpython2.7
+</code></pre>
+<p>在Python交互模式下测试：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> great_class</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = great_class.Great()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.setWall(<span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.getWall()</span><br><span class="line"><span class="number">5</span></span><br></pre></td></tr></table></figure>
+<p>也就是说C++的class会直接映射到Python class</p>
+<p>SWIG非常强大，对于Python接口而言，简单类型，甚至指针，都无需人工干涉即可自动转换，而复杂类型，尤其是自定义类型，SWIG提供了typemap供转换。而一旦使用了typemap，配置文件将不再在各个语言当中通用。</p>
+<p><strong>参考资料：</strong><br>
+SWIG的官方文档，质量比较高。<a href="https://links.jianshu.com/go?to=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttp%253A%2F%2Fwww.swig.org%2FDoc3.0%2FContents.html%2523Contents" target="_blank" rel="noopener">SWIG Users Manual</a><br>
+有个对应的中文版官网，很多年没有更新了。</p>
+<h2 id="写在最后">写在最后</h2>
+<p>由于CPython自身的结构设计合理，使得Python的C/C++扩展非常容易。如果打算快速完成任务，Cython（C/C++调用Python）和SWIG（Python调用C/C++）是很不错的选择。但是，一旦涉及到比较复杂的转换任务，无论是继续使用Cython还是SWIG，仍然需要学习Python源代码。</p>
+<p>本文使用的开发环境：<br>
+Python 2.7.10<br>
+Cython 0.22<br>
+SWIG 3.0.6<br>
+Windows 10 x64 RTM<br>
+CentOS 7.1 AMD 64<br>
+Mac OSX 10.10.4<br>
+文中所述原理与具体环境适用性强。<br>
+文章所述代码均用于演示，缺乏必备的异常检查## 目标</p>
+<p>去除 iconfinder 上 icon 的水印</p>
+<h2 id="原理">原理</h2>
+<p>利用水印像素点和原图像素点颜色合并的原理，如果拥有加过水印的图片和水印图片，就可以反向推出原图原像素点的颜色；前提是你得拥有他的水印图片</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/article/Python与C混合编程遇到的问题/" data-toggle="tooltip" data-placement="top" title="Python与C混合编程遇到的问题">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/article/golang方法/" data-toggle="tooltip" data-placement="top" title="golang方法">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#本文结构"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x672C;&#x6587;&#x7ED3;&#x6784;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#cc-调用-python基础篇"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">C/C++ &#x8C03;&#x7528; Python&#xFF08;&#x57FA;&#x7840;&#x7BC7;&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#python-调用-cc基础篇"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Python &#x8C03;&#x7528; C/C++&#xFF08;&#x57FA;&#x7840;&#x7BC7;&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#cc-调用-python使用cython"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">C/C++ &#x8C03;&#x7528; Python&#xFF08;&#x4F7F;&#x7528;Cython&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#python调用cc使用swig"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Python&#x8C03;&#x7528;C/C++&#xFF08;&#x4F7F;&#x7528;SWIG&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#写在最后"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">&#x5199;&#x5728;&#x6700;&#x540E;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#原理"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">&#x539F;&#x7406;</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">特色标签</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        
+                          <a class="tag" href="/tags/#C/C++" title="C/C++">C/C++</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>友情链接</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://www.ctolib.com/docs//sfile/the-way-to-go_ZH_CN/index.html" target="_blank">golang菜鸟教程</a></li>
+                    
+                        <li><a href="http://docscn.studygolang.com/" target="_blank">golang官网</a></li>
+                    
+                        <li><a href="https://www.kancloud.cn/hello123/beego/126087" target="_blank">beego教程</a></li>
+                    
+                        <li><a href="https://www.ctolib.com/docs//sfile/the-way-to-go_ZH_CN/index.html" target="_blank">golang入门指南</a></li>
+                    
+                        <li><a href="https://github.com/doczhcn/etcd" target="_blank">etcd中文资源</a></li>
+                    
+                        <li><a href="https://github.com/etcd-io/etcd/tree/master/clientv3" target="_blank">golang使用etcd</a></li>
+                    
+                        <li><a href="https://github.com/mongodb/mongo-go-driver" target="_blank">golang使用MongoDB</a></li>
+                    
+                        <li><a href="https://www.mongodb.org.cn/tutorial/" target="_blank">MongoDB中文教程</a></li>
+                    
+                        <li><a href="http://www.tracy.store/" target="_blank">golang+beego+MySQL博客</a></li>
+                    
+                </ul>
+                
+
+                
+<div id="gitment_title" class="gitment_title"></div>
+<div id="container" style="display:none"></div>
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  const myTheme = {
+    render(state, instance) {
+      const container = document.createElement('div');
+      container.lang = "en-US";
+      container.className = 'gitment-container gitment-root-container';
+      container.appendChild(instance.renderHeader(state, instance));
+      container.appendChild(instance.renderEditor(state, instance));
+      container.appendChild(instance.renderComments(state, instance));
+      container.appendChild(instance.renderFooter(state, instance));
+      return container;
+    }
+  }
+
+  function showGitment() {
+    $("#gitment_title").attr("style", "display:none");
+    $("#container").attr("style", "").addClass("gitment_container");
+    var gitment = new Gitment({
+      id: decodeURI(window.location.pathname),
+      theme: myTheme,
+      owner: 'TracyPro',
+      repo: 'TracyPro.github.io',
+      oauth: {
+        client_id: '7efbf680ada61c7be014',
+        client_secret: '2849d29795ada92ac567d1cfc8dba892494c4a18'
+      }
+    });
+    gitment.render('container');
+  }
+
+  showGitment();
+</script>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/u/6161631844?refer_flag=1005055010_&amp;is_all=1">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="/img/wechat_tracy.jpeg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="/img/qq_tracy.jpeg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/TracyPro">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-center">
+                    Copyright &copy; 张嘉伟 2019 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="https://tracypro.github.io">张嘉伟</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=tracypro&repo=tracypro.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.tracy.store/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'xxx';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<!-- <img src="http://www.tracy.store/img/icon_wechat.png" width="0" height="0" /> -->
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
