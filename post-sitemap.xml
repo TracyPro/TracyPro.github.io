@@ -7,6 +7,22 @@
     </url>
 
     <url>
+        <loc>http://www.tracy.store/article/%E8%8A%B1%E8%8A%B1%E4%B8%8E%E4%B8%89%E7%8C%ABCatLive-%E7%AC%AC%E4%B8%89%E7%AF%87/</loc>
+        <lastmod>2019-11-26T16:37:43.042Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://www.tracy.store/article/%E8%8A%B1%E8%8A%B1%E4%B8%8E%E4%B8%89%E7%8C%ABCatLive-%E7%AC%AC%E4%BA%8C%E7%AF%87/</loc>
+        <lastmod>2019-11-26T16:36:18.197Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://www.tracy.store/article/Docker-%E6%90%AD%E5%BB%BAMongoDB%E7%8E%AF%E5%A2%83/</loc>
         <lastmod>2019-11-26T16:24:30.845Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -81,14 +97,6 @@
     <url>
         <loc>http://www.tracy.store/article/golang%E6%96%B9%E6%B3%95/</loc>
         <lastmod>2019-11-23T19:36:52.896Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://www.tracy.store/article/%E8%8A%B1%E8%8A%B1%E4%B8%8E%E4%B8%89%E7%8C%ABCatLive-%E7%AC%AC%E4%BA%8C%E7%AF%87/</loc>
-        <lastmod>2019-11-22T16:39:32.106Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

@@ -15,11 +15,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          dep使用 - 张嘉伟 | Blog
+          花花与三猫CatLive-第三篇 - 张嘉伟 | Blog
         
     </title>
 
-    <link rel="canonical" href="http://www.tracy.store/article/dep使用/">
+    <link rel="canonical" href="http://www.tracy.store/article/花花与三猫CatLive-第三篇/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -60,7 +60,7 @@
 
     <!-- ga & ba script hoook -->
     <script></script>
-</head>
+<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"></script></head>
 
 
 <!-- hack iOS CSS :active style -->
@@ -91,16 +91,16 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#Golang" title="Golang">Golang</a>
+                              <a class="tag" href="/tags/#猫咪" title="猫咪">猫咪</a>
                             
-                              <a class="tag" href="/tags/#dep" title="dep">dep</a>
+                              <a class="tag" href="/tags/#短视频" title="短视频">短视频</a>
                             
                         </div>
-                        <h1>dep使用</h1>
-                        <h2 class="subheading">dep依赖包管理</h2>
+                        <h1>花花与三猫CatLive-第三篇</h1>
+                        <h2 class="subheading">可爱的猫咪😚</h2>
                         <span class="meta">
                             Posted by 张嘉伟 on
-                            2019-11-25
+                            2019-11-27
                         </span>
                     </div>
                 
@@ -224,37 +224,18 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="dep简介">dep简介</h2>
-<p><font color="#dd0000">dep</font>是一个golang项目的包管理工具，一般只需要2-3个命令就可以将go依赖包自动下载并归档到<font color="#dd0000">vender</font>的目录中。dep官网参考：<a href="https://github.com/golang/dep" target="_blank" rel="noopener">https://github.com/golang/dep</a></p>
-<h2 id="dep安装">dep安装</h2>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> get -u github.com/golang/dep/cmd/dep</span><br></pre></td></tr></table></figure>
-<h2 id="dep使用">dep使用</h2>
-<h3 id="进入到项目目录">进入到项目目录</h3>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /home/gopath/src/demo</span><br></pre></td></tr></table></figure>
-<h3 id="dep初始化初始化配置文件gopkgtoml">dep初始化，初始化配置文件Gopkg.toml</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dep init</span><br></pre></td></tr></table></figure>
-<h3 id="dep加载依赖包自动归档到vendor目录">dep加载依赖包，自动归档到vendor目录</h3>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dep ensure</span><br></pre></td></tr></table></figure>
-<p>最终会生成vendor目录，Gopkg.toml和Gopkg.lock的文件</p>
-<h2 id="dep的配置文件">dep的配置文件</h2>
-<p><font color="#dd0000">Gopkg.toml</font>记录依赖包列表。</p>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"># Gopkg.toml example</span><br><span class="line">#</span><br><span class="line"># Refer to https:<span class="comment">//golang.github.io/dep/docs/Gopkg.toml.html</span></span><br><span class="line"># <span class="keyword">for</span> detailed Gopkg.toml documentation.</span><br><span class="line">#</span><br><span class="line"># required = [<span class="string">"github.com/user/thing/cmd/thing"</span>]</span><br><span class="line"># ignored = [<span class="string">"github.com/user/project/pkgX"</span>, <span class="string">"bitbucket.org/user/project/pkgA/pkgY"</span>]</span><br><span class="line">#</span><br><span class="line"># [[constraint]]</span><br><span class="line">#   name = <span class="string">"github.com/user/project"</span></span><br><span class="line">#   version = <span class="string">"1.0.0"</span></span><br><span class="line">#</span><br><span class="line"># [[constraint]]</span><br><span class="line">#   name = <span class="string">"github.com/user/project2"</span></span><br><span class="line">#   branch = <span class="string">"dev"</span></span><br><span class="line">#   source = <span class="string">"github.com/myfork/project2"</span></span><br><span class="line">#</span><br><span class="line"># [[override]]</span><br><span class="line">#   name = <span class="string">"github.com/x/y"</span></span><br><span class="line">#   version = <span class="string">"2.4.0"</span></span><br><span class="line">#</span><br><span class="line"># [prune]</span><br><span class="line">#   non-<span class="keyword">go</span> = <span class="literal">false</span></span><br><span class="line">#   <span class="keyword">go</span>-tests = <span class="literal">true</span></span><br><span class="line">#   unused-packages = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">ignored = [<span class="string">"demo"</span>]</span><br><span class="line"></span><br><span class="line">[[constraint]]</span><br><span class="line">  name = <span class="string">"github.com/BurntSushi/toml"</span></span><br><span class="line">  version = <span class="string">"0.3.0"</span></span><br><span class="line">  </span><br><span class="line">[prune]</span><br><span class="line">  <span class="keyword">go</span>-tests = <span class="literal">true</span></span><br><span class="line">  unused-packages = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<h2 id="dep-help">dep-help</h2>
-<p>更多<font color="#dd0000">dep</font>的命令帮助参考<font color="#dd0000">dep</font>。</p>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ dep</span><br><span class="line">Dep is a tool <span class="keyword">for</span> managing dependencies <span class="keyword">for</span> Go projects</span><br><span class="line"></span><br><span class="line">Usage: <span class="string">"dep [command]"</span></span><br><span class="line"></span><br><span class="line">Commands:</span><br><span class="line"></span><br><span class="line">  init     Set up a <span class="built_in">new</span> Go project, or migrate an existing one</span><br><span class="line">  status   Report the status of the project<span class="string">'s dependencies</span></span><br><span class="line"><span class="string">  ensure   Ensure a dependency is safely vendored in the project</span></span><br><span class="line"><span class="string">  prune    Pruning is now performed automatically by dep ensure.</span></span><br><span class="line"><span class="string">  version  Show the dep version information</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Examples:</span></span><br><span class="line"><span class="string">  dep init                               set up a new project</span></span><br><span class="line"><span class="string">  dep ensure                             install the project'</span>s dependencies</span><br><span class="line">  dep ensure -update                     update the locked versions of all dependencies</span><br><span class="line">  dep ensure -add github.com/pkg/errors  add a dependency to the project</span><br><span class="line"></span><br><span class="line">Use <span class="string">"dep help [command]"</span> <span class="keyword">for</span> more information about a command.</span><br></pre></td></tr></table></figure>
+                <h2 id="带家里胆最大的猫咪出门以为可以遛弯儿结果怂成一团">带家里胆最大的猫咪出门，以为可以遛弯儿，结果怂成一团！</h2>
+<div id="dplayer0" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer0"),"theme":"#FADFA3","loop":true,"video":{"url":"http://gslb.miaopai.com/stream/wssuU3yJrVOqvDLg3UursIbQ~jemHI8VtDNSBg__.mp4","pic":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575045065&di=3a926764f3c280d97a71f67dbfa06ecb&imgtype=jpg&er=1&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farchive%2F5ba90764c07e49e0315523ce4aafc580dbad2b1c.jpg"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script>
+
                 
 
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/article/Python解析pcap文件/" data-toggle="tooltip" data-placement="top" title="Python解析pcap文件">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/article/etcd常用命令/" data-toggle="tooltip" data-placement="top" title="etcd常用命令">Next Post &rarr;</a>
+                            <a href="/article/Docker-搭建MongoDB环境/" data-toggle="tooltip" data-placement="top" title="Docker搭建MongoDB环境">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -280,7 +261,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#dep简介"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">dep&#x7B80;&#x4ECB;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#dep安装"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">dep&#x5B89;&#x88C5;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#dep使用"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">dep&#x4F7F;&#x7528;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#进入到项目目录"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">&#x8FDB;&#x5165;&#x5230;&#x9879;&#x76EE;&#x76EE;&#x5F55;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#dep初始化初始化配置文件gopkgtoml"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">dep&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x521D;&#x59CB;&#x5316;&#x914D;&#x7F6E;&#x6587;&#x4EF6;Gopkg.toml</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#dep加载依赖包自动归档到vendor目录"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">dep&#x52A0;&#x8F7D;&#x4F9D;&#x8D56;&#x5305;&#xFF0C;&#x81EA;&#x52A8;&#x5F52;&#x6863;&#x5230;vendor&#x76EE;&#x5F55;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#dep的配置文件"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">dep&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#dep-help"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">dep-help</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#带家里胆最大的猫咪出门以为可以遛弯儿结果怂成一团"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x5E26;&#x5BB6;&#x91CC;&#x80C6;&#x6700;&#x5927;&#x7684;&#x732B;&#x54AA;&#x51FA;&#x95E8;&#xFF0C;&#x4EE5;&#x4E3A;&#x53EF;&#x4EE5;&#x905B;&#x5F2F;&#x513F;&#xFF0C;&#x7ED3;&#x679C;&#x6002;&#x6210;&#x4E00;&#x56E2;&#xFF01;</span></a></li></ol>
         
         </div>
       </aside>
@@ -302,9 +283,9 @@
                     <h5><a href="/tags/">特色标签</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Golang" title="Golang">Golang</a>
+                          <a class="tag" href="/tags/#猫咪" title="猫咪">猫咪</a>
                         
-                          <a class="tag" href="/tags/#dep" title="dep">dep</a>
+                          <a class="tag" href="/tags/#短视频" title="短视频">短视频</a>
                         
                     </div>
                 </section>
