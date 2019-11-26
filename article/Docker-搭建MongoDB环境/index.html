@@ -15,11 +15,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          一张图告诉你, 科班程序员和自学编程的差别在哪 网友：真实！！ - 张嘉伟 | Blog
+          Docker搭建MongoDB环境 - 张嘉伟 | Blog
         
     </title>
 
-    <link rel="canonical" href="http://www.tracy.store/article/一张图告诉你-科班程序员和-自学编程的差别在哪-网友：真实！！/">
+    <link rel="canonical" href="http://www.tracy.store/article/Docker-搭建MongoDB环境/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -91,14 +91,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#编程" title="编程">编程</a>
+                              <a class="tag" href="/tags/#Docker" title="Docker">Docker</a>
                             
                         </div>
-                        <h1>一张图告诉你, 科班程序员和自学编程的差别在哪 网友：真实！！</h1>
-                        <h2 class="subheading">科班程序员和自学编程的差别</h2>
+                        <h1>Docker搭建MongoDB环境</h1>
+                        <h2 class="subheading">Docker搭建MongoDB</h2>
                         <span class="meta">
                             Posted by 张嘉伟 on
-                            2019-11-26
+                            2019-11-27
                         </span>
                     </div>
                 
@@ -222,42 +222,23 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>自学编程的程序员，似乎都处于轻视链的底端，而计算机专业的毕业生，似乎自然存在着一种自卑感。自学编程和科班程序员的差距，到底有多大？这也是行将“入坑”的编程喜好者，最关怀的一个问题。</p>
-<h3 id="学问体系的差异">学问体系的差异</h3>
-<p>科班出身的程序员，相关于自学编程者，具备愈加完善的学问体系，在实践工作中，能更快的构成完好的任职，从而更深化地处理问题。</p>
-<p><img src="./img_1.png" alt=""></p>
-<p>由于大学期间，曾经系统的学习了计算机学问，因而科班程序员的学问体系愈加完好，学起东西的速度也更快。</p>
-<p>自学成才者，可能由于触及到本人未知的根底概念，而不得不先补根底，再学习。</p>
-<p>那么，谁的代码写的更好呢？还真不一定！</p>
-<h3 id="就业的区别">就业的区别</h3>
-<p>关于 BAT 大厂而言，僧多粥少，为了降低用人风险，他们更倾向于招聘科班选手。</p>
-<p>关于初创公司而言，我没有时间等你从一个理论型选手，生长为实战型选手，我更喜欢具有短平快的技术。</p>
-<p><img src="./img_2.png" alt=""></p>
-<p>索性，没有公司会仅仅看学历一个标签，代码 or 成果，这两个标签页非常重要。开源项目的掌管或参与，漂亮而充实的 GitHub 页面、优秀的 Top Coder，也会是很亮眼的标签。</p>
-<p><img src="./img_3.png" alt=""></p>
-<h3 id="具有资源的不同">具有资源的不同</h3>
-<p>科班程序员就像是宠物饲养员，被狗狗熏着熏着，本人也会把本人想象成狗了。</p>
-<p>自学成才的，自家里只养了条狗，需求更努力的与大咖们交流思想，才干把本人想象成狗。</p>
-<p><img src="./img_4.png" alt=""></p>
-<p>市场的需求量大增，编程入门门槛的降低，让无数自学编程的喜好者，涌入了这一行业，殊不知，若不时辰坚持学习心态，锐意进取，那么就会如马云那句名言：</p>
-<p><img src="./img_5.png" alt=""></p>
-<p>反之，关于科班程序员而言，就算是再牛，人之为学，不日进则日退，不过几年，也会泯然众人矣。</p>
-<p>话说回来，到底科班程序员，和自学成才的人，有什么区别呢？一张图能够表达的明明白白。</p>
-<p><img src="./img_6.png" alt=""></p>
-
+                <h3 id="从dockerhub下载mongodb官方镜像">从DockerHUB下载MongoDB官方镜像</h3>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mongo</span><br></pre></td></tr></table></figure>
+<h3 id="运行镜像生成容器">运行镜像生成容器</h3>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p <span class="number">27017</span>:<span class="number">27017</span> --name mongo -v /home/data/db:/data/db -d mongo --auth</span><br><span class="line">-p <span class="number">27017</span>:<span class="number">27017</span> 端口映射</span><br><span class="line">-v /home/data/db:/data/db 通过卷挂载将MongoDB的数据存在宿主机的/home/data/db中</span><br><span class="line">-- auth 设置授权与鉴权</span><br></pre></td></tr></table></figure>
+<h3 id="添加admin用户">添加admin用户</h3>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mongo mongo admin</span><br></pre></td></tr></table></figure>
+<h3 id="创建数据库">创建数据库</h3>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.createUser(&#123; user: <span class="string">'root'</span>, pwd: <span class="string">'password'</span>, roles: [ &#123; role: <span class="string">"userAdminAnyDatabase"</span>, db: <span class="string">"admin"</span> &#125; ] &#125;);</span><br></pre></td></tr></table></figure>
                 
 
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/article/Docker教程/" data-toggle="tooltip" data-placement="top" title="Docker教程">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/article/可以免费自学的10个编程网站/" data-toggle="tooltip" data-placement="top" title="可以免费自学的10个编程网站">Next Post &rarr;</a>
+                            <a href="/article/Docker教程/" data-toggle="tooltip" data-placement="top" title="Docker教程">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -283,7 +264,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#学问体系的差异"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x5B66;&#x95EE;&#x4F53;&#x7CFB;&#x7684;&#x5DEE;&#x5F02;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#就业的区别"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x5C31;&#x4E1A;&#x7684;&#x533A;&#x522B;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#具有资源的不同"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x5177;&#x6709;&#x8D44;&#x6E90;&#x7684;&#x4E0D;&#x540C;</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#从dockerhub下载mongodb官方镜像"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x4ECE;DockerHUB&#x4E0B;&#x8F7D;MongoDB&#x5B98;&#x65B9;&#x955C;&#x50CF;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#运行镜像生成容器"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x8FD0;&#x884C;&#x955C;&#x50CF;&#x751F;&#x6210;&#x5BB9;&#x5668;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#添加admin用户"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x6DFB;&#x52A0;admin&#x7528;&#x6237;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#创建数据库"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x521B;&#x5EFA;&#x6570;&#x636E;&#x5E93;</span></a></li></ol>
         
         </div>
       </aside>
@@ -305,7 +286,7 @@
                     <h5><a href="/tags/">特色标签</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#编程" title="编程">编程</a>
+                          <a class="tag" href="/tags/#Docker" title="Docker">Docker</a>
                         
                     </div>
                 </section>
