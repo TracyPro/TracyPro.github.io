@@ -16,13 +16,6 @@
     </url>
 
     <url>
-        <loc>http://www.tracy.store/tags/Golang/</loc>
-        <lastmod>2019-11-25T07:13:56.558Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://www.tracy.store/tags/dep/</loc>
         <lastmod>2019-11-25T07:13:56.558Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -60,6 +53,20 @@
     <url>
         <loc>http://www.tracy.store/tags/%E7%9F%AD%E8%A7%86%E9%A2%91/</loc>
         <lastmod>2019-11-26T16:37:43.042Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://www.tracy.store/tags/Golang/</loc>
+        <lastmod>2019-11-29T04:58:09.966Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://www.tracy.store/tags/make/</loc>
+        <lastmod>2019-11-29T04:58:09.966Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

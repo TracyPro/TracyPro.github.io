@@ -15,11 +15,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          花花与三猫CatLive-第三篇 - 张嘉伟 | Blog
+          使用go管理Makefile - 张嘉伟 | Blog
         
     </title>
 
-    <link rel="canonical" href="http://www.tracy.store/article/花花与三猫CatLive-第三篇/">
+    <link rel="canonical" href="http://www.tracy.store/article/使用go管理Makefile/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -60,7 +60,7 @@
 
     <!-- ga & ba script hoook -->
     <script></script>
-<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"></script></head>
+</head>
 
 
 <!-- hack iOS CSS :active style -->
@@ -91,16 +91,16 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#猫咪" title="猫咪">猫咪</a>
+                              <a class="tag" href="/tags/#Golang" title="Golang">Golang</a>
                             
-                              <a class="tag" href="/tags/#短视频" title="短视频">短视频</a>
+                              <a class="tag" href="/tags/#make" title="make">make</a>
                             
                         </div>
-                        <h1>花花与三猫CatLive-第三篇</h1>
-                        <h2 class="subheading">可爱的猫咪😚</h2>
+                        <h1>使用go管理Makefile</h1>
+                        <h2 class="subheading">golang编写Makefile</h2>
                         <span class="meta">
                             Posted by 张嘉伟 on
-                            2019-11-27
+                            2019-11-29
                         </span>
                     </div>
                 
@@ -224,8 +224,58 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h2 id="带家里胆最大的猫咪出门以为可以遛弯儿结果怂成一团">带家里胆最大的猫咪出门，以为可以遛弯儿，结果怂成一团！</h2>
-<div id="dplayer0" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer0"),"theme":"#FADFA3","loop":true,"video":{"url":"http://gslb.miaopai.com/stream/wssuU3yJrVOqvDLg3UursIbQ~jemHI8VtDNSBg__.mp4","pic":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575045065&di=3a926764f3c280d97a71f67dbfa06ecb&imgtype=jpg&er=1&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farchive%2F5ba90764c07e49e0315523ce4aafc580dbad2b1c.jpg"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script>
+                <h3 id="简介">简介</h3>
+<p>很多时候， 我们需要运行多个命令来能完成一件事，又或者某个命令需要指定很多参数。这个时候，就需要使用脚本来取代这些复杂的命令，减少输错命令的可能，也可以为后来者指明常用的操作。</p>
+<h3 id="makefile">Makefile</h3>
+<p>Makefile就是为此而生的，相对于用途广泛的shell脚本，Makefile专注于构建自动化过程， 通常用于编译源码等。 很多项目都会提供Makefile文件，只需要简单地运行<code>make</code> 就能轻松完成编译构建的过程。</p>
+<p>简单介绍下Makefile的规则。</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">target: dependencies</span><br><span class="line">    system command(s)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>target通常是程序要生成的目标文件的名字。但也可以是一个动作的名字。</p>
+</li>
+<li>
+<p>dependencies是依赖，通常是文件，完成target所需要的输入。</p>
+</li>
+<li>
+<p>system command(s) 是完成 target 所需要运行的指令， 即 shell 命令。<br>
+一条语句一行， 使用单个 tab 缩进。</p>
+</li>
+</ul>
+<p>使用 make 命令可以运行各种 target。 如果不带 target 参数，<br>
+第一个 target 会被作为默认目标。</p>
+<p>很多时候， Makefile 不是为了编译， 也不再引用任何文件，<br>
+仅仅是为了整合多个命令， 比写脚本方便多。<br>
+这个时候涉及到一个叫做伪目标的指令 <code>.PHONY</code>。<br>
+<code>.PHONY</code> 后面跟着的多个 target 都不是要生成的文件的名字，<br>
+而是指代一个动作， 一个行为。 比如 test 指运行测试， clean 清理文件等。</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.PHONY: all test clean doc ci</span><br></pre></td></tr></table></figure>
+<p>更多内容可以参考<br>
+<a href="https://links.jianshu.com/go?to=https%3A%2F%2Fseisman.github.io%2Fhow-to-write-makefile%2Findex.html" target="_blank" rel="noopener">跟我一起写 Makefile</a></p>
+<h3 id="实践">实践</h3>
+<p><strong>注意， windows 下没有 make 命令， 所以 Makefile 也就无法使用。</strong></p>
+<p>你可以在 docker 容器中运行命令， 可以参考另一篇文章<br>
+<code>在 VS Code 中使用容器开发</code>。</p>
+<p>在项目的根目录添加 <code>Makefile</code> 文件:</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">all: gotool build</span><br><span class="line">build:</span><br><span class="line">    @<span class="keyword">go</span> build ./</span><br><span class="line">run:</span><br><span class="line">    @<span class="keyword">go</span> run ./</span><br><span class="line">clean:</span><br><span class="line">    rm -f web</span><br><span class="line">    find . -name <span class="string">"[._]*.s[a-w][a-z]"</span> | xargs -i rm -f &#123;&#125;</span><br><span class="line">gotool:</span><br><span class="line">    <span class="keyword">go</span> fmt ./</span><br><span class="line">    <span class="keyword">go</span> vet ./</span><br><span class="line">ca:</span><br><span class="line">    MSYS_NO_PATHCONV=<span class="number">1</span> openssl req -<span class="built_in">new</span> -nodes -x509 -out conf/server.crt -keyout conf/server.key -days <span class="number">3650</span> -subj <span class="string">"/C=CN/ST=SH/L=SH/O=CoolCat/OU=CoolCat Software/CN=127.0.0.1/emailAddress=coolcat@qq.com"</span></span><br><span class="line">mysql:</span><br><span class="line">    docker-compose up -d mysql</span><br><span class="line">dbcli:</span><br><span class="line">    docker-compose run --rm dbclient</span><br><span class="line"></span><br><span class="line">help:</span><br><span class="line">    @echo <span class="string">"make - 格式化 Go 代码， 并编译生成二进制文件"</span></span><br><span class="line">    @echo <span class="string">"make build - 编译 Go 代码， 生成二进制文件"</span></span><br><span class="line">    @echo <span class="string">"make run - 直接运行 Go 代码"</span></span><br><span class="line">    @echo <span class="string">"make clean - 移除二进制文件和 vim swap files"</span></span><br><span class="line">    @echo <span class="string">"make gotool - 运行 Go 工具 'fmt' and 'vet'"</span></span><br><span class="line">    @echo <span class="string">"make ca - 生成证书文件"</span></span><br><span class="line">    @echo <span class="string">"make mysql - 启动 mysql 服务器"</span></span><br><span class="line">    @echo <span class="string">"make dbcli - 连接到 mysql 命令行"</span></span><br><span class="line"></span><br><span class="line">。PHONY: all build run clean gotool ca mysql dbcli help</span><br></pre></td></tr></table></figure>
+<p>这里的所有 target 都是伪目标。用来包装一些简单的 shell 命令。</p>
+<p>可以在项目根目录下运行以下命令:</p>
+<ul>
+<li>make - 格式化 Go 代码， 并编译生成二进制文件</li>
+<li>make build - 编译 Go 代码， 生成二进制文件</li>
+<li>make run - 直接运行 Go 代码</li>
+<li>make clean - 移除二进制文件和 vim swap files</li>
+<li>make gotool - 运行 Go 工具 ‘fmt’ and ‘vet’</li>
+<li>make ca - 生成证书文件</li>
+<li>make mysql - 启动 mysql 服务器</li>
+<li>make dbcli - 连接到 mysql 命令行</li>
+<li>make help - 查看帮助信息</li>
+</ul>
+<p>有了 Makefile 的帮助， 很多事情变得简单起来了，<br>
+比如要生成证书文件， 只需要运行 <code>make ca</code> 就行了，<br>
+不用输入一大行命令了。</p>
+<h3 id="总结">总结</h3>
+<p>Makefile 是 linux 下常用的工具， 对于提升效率是非常有效的。</p>
 
                 
 
@@ -233,13 +283,9 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/article/使用go管理Makefile/" data-toggle="tooltip" data-placement="top" title="使用go管理Makefile">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/article/Docker-搭建MongoDB环境/" data-toggle="tooltip" data-placement="top" title="Docker搭建MongoDB环境">Next Post &rarr;</a>
+                            <a href="/article/花花与三猫CatLive-第三篇/" data-toggle="tooltip" data-placement="top" title="花花与三猫CatLive-第三篇">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -265,7 +311,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#带家里胆最大的猫咪出门以为可以遛弯儿结果怂成一团"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x5E26;&#x5BB6;&#x91CC;&#x80C6;&#x6700;&#x5927;&#x7684;&#x732B;&#x54AA;&#x51FA;&#x95E8;&#xFF0C;&#x4EE5;&#x4E3A;&#x53EF;&#x4EE5;&#x905B;&#x5F2F;&#x513F;&#xFF0C;&#x7ED3;&#x679C;&#x6002;&#x6210;&#x4E00;&#x56E2;&#xFF01;</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#简介"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x7B80;&#x4ECB;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#makefile"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Makefile</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#实践"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x5B9E;&#x8DF5;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x603B;&#x7ED3;</span></a></li></ol>
         
         </div>
       </aside>
@@ -287,9 +333,9 @@
                     <h5><a href="/tags/">特色标签</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#猫咪" title="猫咪">猫咪</a>
+                          <a class="tag" href="/tags/#Golang" title="Golang">Golang</a>
                         
-                          <a class="tag" href="/tags/#短视频" title="短视频">短视频</a>
+                          <a class="tag" href="/tags/#make" title="make">make</a>
                         
                     </div>
                 </section>
