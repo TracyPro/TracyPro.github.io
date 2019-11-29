@@ -191,9 +191,9 @@
       
         <tags>
             
-            <tag> etcd </tag>
-            
             <tag> Golang </tag>
+            
+            <tag> etcd </tag>
             
         </tags>
       
