@@ -151,6 +151,22 @@
                     
 
                         
+                    
+
+                        
+                        <li>
+                            <a href="/photos/">Photos</a>
+                        </li>
+                        
+                    
+
+                        
+                    
+
+                        
+                    
+
+                        
                         <li>
                             <a href="/tags/">Tags</a>
                         </li>
@@ -158,9 +174,8 @@
                     
 
                         
-                        <li>
-                            <a href="/photos/">Photos</a>
-                        </li>
+                    
+
                         
                     
                     
@@ -217,21 +232,26 @@
                 post-container
             ">
             
-                <h2 id="mac高清壁纸分享">Mac高清壁纸分享</h2>
-<p><a href="imgs/WechatIMG9.jpeg"><img src="imgs/WechatIMG9.jpeg" alt="Park"></a></p>
-<p><a href="imgs/WechatIMG8.jpeg"><img src="imgs/WechatIMG8.jpeg" alt="Bridge"></a></p>
-<p><a href="imgs/WechatIMG6.jpeg"><img src="imgs/WechatIMG6.jpeg" alt="Tunnel"></a></p>
-<p><a href="imgs/WechatIMG5.jpeg"><img src="imgs/WechatIMG5.jpeg" alt="Coast"></a></p>
-<p><a href="imgs/WechatIMG4.jpeg"><img src="imgs/WechatIMG4.jpeg" alt="Traffic"></a></p>
-<p><a href="imgs/WechatIMG10.jpeg"><img src="imgs/WechatIMG10.jpeg" alt="Rails"></a></p>
-<p><a href="imgs/WechatIMG11.jpeg"><img src="imgs/WechatIMG11.jpeg" alt="Rails"></a></p>
-<p><a href="imgs/WechatIMG12.jpeg"><img src="imgs/WechatIMG12.jpeg" alt="Rails"></a></p>
-<p><a href="imgs/WechatIMG13.jpeg"><img src="imgs/WechatIMG13.jpeg" alt="Rails"></a></p>
-<p><a href="imgs/WechatIMG14.jpeg"><img src="imgs/WechatIMG14.jpeg" alt="Rails"></a></p>
-<p><a href="imgs/WechatIMG16.jpeg"><img src="imgs/WechatIMG16.jpeg" alt="Rails"></a></p>
-<p><a href="imgs/WechatIMG17.jpeg"><img src="imgs/WechatIMG17.jpeg" alt="Rails"></a></p>
-<p><a href="imgs/WechatIMG18.jpeg"><img src="imgs/WechatIMG18.jpeg" alt="Rails"></a></p>
-
+                <link rel="stylesheet" href="./ins.css">
+<link rel="stylesheet" href="./default-skin/default-skin.css"> 
+<link rel="stylesheet" href="./photoswipe.css"> 
+<div class="instagram itemscope">
+  <a href="https://github.com/TracyPro/blog-photos/tree/master/process-photos/min_photos" target="_blank" class="open-ins">图片正在加载中…</a>
+</div>
+<script type="text/javascript" src="/js/photoswipe.min.js"></script>
+<script type="text/javascript" src="/js/photoswipe-ui-default.min.js"></script>
+<script>
+  (function() {
+    var loadScript = function(path) {
+      var $script = document.createElement('script')
+      document.getElementsByTagName('body')[0].appendChild($script)
+      $script.setAttribute('src', path)
+    }
+    setTimeout(function() {
+        loadScript('./ins.js')
+    }, 0)
+  })()
+</script>
 
                 <!-- 如果开启评论功能 -->
                 
@@ -290,18 +310,6 @@ var search_path = "search.xml";
     <div class="tags">
         
             
-            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
-            
-        
-            
-            <a href="/tags/#Python" title="Python" rel="3">Python</a>
-            
-        
-            
-            <a href="/tags/#C/C++" title="C/C++" rel="2">C/C++</a>
-            
-        
-            
             <a href="/tags/#Golang" title="Golang" rel="5">Golang</a>
             
         
@@ -310,7 +318,19 @@ var search_path = "search.xml";
             
         
             
+            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
+            
+        
+            
+            <a href="/tags/#Python" title="Python" rel="3">Python</a>
+            
+        
+            
             <a href="/tags/#etcd" title="etcd" rel="3">etcd</a>
+            
+        
+            
+            <a href="/tags/#C/C++" title="C/C++" rel="2">C/C++</a>
             
         
             
@@ -688,6 +708,49 @@ var search_path = "search.xml";
 	<a id="rocket" href="#top" class=""></a>
 	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
     <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+    
+    {% if page.type === "photos" %}
+  <!-- Root element of PhotoSwipe. Must have class pswp. -->
+  <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+  </div>
+{% endif %}
 <!-- Image to hack wechat -->
 <!-- <img src="http://www.tracy.store/img/icon_wechat.png" width="0" height="0" /> -->
 <!-- Migrate from head to bottom, no longer block render and still work -->

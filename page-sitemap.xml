@@ -7,6 +7,13 @@
     </url>
     
     <url>
+        <loc>http://www.tracy.store/photos/</loc>
+        <lastmod>2019-11-30T12:03:40.140Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
         <loc>http://www.tracy.store/about/</loc>
         <lastmod>2019-11-26T15:29:54.949Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -23,13 +30,6 @@
     <url>
         <loc>http://www.tracy.store/tags/</loc>
         <lastmod>2019-11-26T15:23:54.604Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    
-    <url>
-        <loc>http://www.tracy.store/photos/</loc>
-        <lastmod>2019-11-26T14:59:15.112Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
