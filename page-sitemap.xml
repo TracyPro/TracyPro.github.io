@@ -7,6 +7,13 @@
     </url>
     
     <url>
+        <loc>http://www.tracy.store/videos/</loc>
+        <lastmod>2019-12-01T08:12:10.060Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
         <loc>http://www.tracy.store/photos/</loc>
         <lastmod>2019-12-01T06:56:58.954Z</lastmod>
         <changefreq>weekly</changefreq>
