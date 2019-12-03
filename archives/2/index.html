@@ -151,12 +151,12 @@
                     
 
                         
+                    
+
+                        
                         <li>
                             <a href="/photos/">Photos</a>
                         </li>
-                        
-                    
-
                         
                     
 
@@ -235,6 +235,40 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/article/golang基于etcd实现分布式锁/">
+        <h2 class="post-title">
+            golang基于etcd实现分布式锁
+        </h2>
+        <h3 class="post-subtitle">
+            golang中使用etcd
+        </h3>
+        <div class="post-content-preview">
+            我们希望同一时间只有一个线程能够访问到资源，但是分布式资源点之间的协调会非常麻烦，这个时候我们就需要一个分布式锁。
+etcd分布式锁实现原理：
+1.利用租约在etcd集群中创建一个key，这个key有两种形态，存在和不存在，而这两种形态就是互斥量。
+2.如果这个key不存在，那么线程创建key，成功则获取到锁，该key就为存在状态。
+3.如果该key已经存在，那么线程就不能创建key，则获取......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 张嘉伟 on
+            2019-11-24
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#etcd" title="etcd">etcd</a>
+            
+              <a href="/tags/#Golang" title="Golang">Golang</a>
+            
+        </div>
+    
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -522,6 +556,10 @@ var search_path = "search.xml";
     <div class="tags">
         
             
+            <a href="/tags/#APT样本提取" title="APT样本提取" rel="1">APT样本提取</a>
+            
+        
+            
             <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
             
         
@@ -534,6 +572,10 @@ var search_path = "search.xml";
             
         
             
+            <a href="/tags/#etcd" title="etcd" rel="3">etcd</a>
+            
+        
+            
             <a href="/tags/#Golang" title="Golang" rel="5">Golang</a>
             
         
@@ -542,15 +584,11 @@ var search_path = "search.xml";
             
         
             
-            <a href="/tags/#etcd" title="etcd" rel="3">etcd</a>
+            <a href="/tags/#make" title="make" rel="1">make</a>
             
         
             
             <a href="/tags/#编程" title="编程" rel="2">编程</a>
-            
-        
-            
-            <a href="/tags/#make" title="make" rel="1">make</a>
             
         
             
@@ -644,6 +682,10 @@ var search_path = "search.xml";
     <ul>
       
         <li>
+          <a href="/article/APT恶意软件分析之从WORD中提取EXE技术/">APT恶意软件分析之从WORD中提取EXE技术</a>
+        </li>
+      
+        <li>
           <a href="/article/使用go管理Makefile/">使用go管理Makefile</a>
         </li>
       
@@ -657,10 +699,6 @@ var search_path = "search.xml";
       
         <li>
           <a href="/article/Docker教程/">Docker教程</a>
-        </li>
-      
-        <li>
-          <a href="/article/一张图告诉你-科班程序员和-自学编程的差别在哪-网友：真实！！/">一张图告诉你, 科班程序员和自学编程的差别在哪 网友：真实！！</a>
         </li>
       
     </ul>
@@ -699,7 +737,7 @@ var search_path = "search.xml";
         
     <h5>归档</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">17</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">17</span></li></ul>
     </div>
 
         <hr>
