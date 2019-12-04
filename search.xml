@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>RISC和CISC科普</title>
+      <link href="/article/RISC%E5%92%8CCISC%E7%A7%91%E6%99%AE/"/>
+      <url>/article/RISC%E5%92%8CCISC%E7%A7%91%E6%99%AE/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>RISC是英文Reduced Instruction Set Computer<br>CISC是英文Complex Instruction Set Computer<br>RISC（精简指令集计算机）和CISC（复杂指令集计算机）是当前CPU的两种架构。它们的区别在于不同的CPU设计理念和方法。</p></blockquote><h3 id="cisc架构">CISC架构</h3><p>早期的CPU全部是CISC架构，它的设计目的是要用最少的机器语言指令来完成所需的计算任务。比如对于乘法运算，在CISC架构的CPU上，您可能需要这样一条指令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MUL ADDRA, ADDRB</span><br></pre></td></tr></table></figure><p>就可以将ADDRA和ADDRB中的数相乘并将结果储存在ADDRA中。将ADDRA, ADDRB中的数据读入寄存器，相乘和将结果写回内存的操作全部依赖于CPU中设计的逻辑来实现。这种架构会增加CPU结构的复杂性和对CPU工艺的要求，但对于编译器的开发十分有利。比如上面的例子，C程序中的<font color="#dd0000">a*=b</font>就可以直接编译为一条乘法指令。今天只有Intel及其兼容CPU还在使用CISC架构。</p><h3 id="risc架构">RISC架构</h3><p>RISC架构要求软件来指定各个操作步骤。上面的例子如果要在RISC架构上实现，将ADDRA, ADDRB中的数据读入寄存器，相乘和将结果写回内存的操作都必须由软件来实现，比如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MOV A, ADDRA; </span><br><span class="line">MOV B, ADDRB; </span><br><span class="line">MUL A, B; </span><br><span class="line">STR ADDRA, A;</span><br></pre></td></tr></table></figure><p>这种架构可以降低CPU的复杂性以及允许在同样的工艺水平下生产出功能更强大的CPU，但对于编译器的设计有更高的要求。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> CPU </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>APT恶意软件分析之从WORD中提取EXE技术</title>
       <link href="/article/APT%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%88%86%E6%9E%90%E4%B9%8B%E4%BB%8EWORD%E4%B8%AD%E6%8F%90%E5%8F%96EXE%E6%8A%80%E6%9C%AF/"/>
       <url>/article/APT%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6%E5%88%86%E6%9E%90%E4%B9%8B%E4%BB%8EWORD%E4%B8%AD%E6%8F%90%E5%8F%96EXE%E6%8A%80%E6%9C%AF/</url>
