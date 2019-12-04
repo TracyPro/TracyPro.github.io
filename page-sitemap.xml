@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>http://www.tracy.store</loc>
+        <loc>https://tracy.pro</loc>
         <changefreq>daily</changefreq>
         <priority>1</priority>
     </url>
     
     <url>
-        <loc>http://www.tracy.store/videos/</loc>
+        <loc>https://tracy.pro/videos/</loc>
         <lastmod>2019-12-01T12:45:20.615Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>http://www.tracy.store/photos/</loc>
+        <loc>https://tracy.pro/photos/</loc>
         <lastmod>2019-12-01T06:56:58.954Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>http://www.tracy.store/tags/</loc>
+        <loc>https://tracy.pro/tags/</loc>
         <lastmod>2019-12-01T06:44:05.868Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>http://www.tracy.store/about/</loc>
+        <loc>https://tracy.pro/about/</loc>
         <lastmod>2019-11-26T15:29:54.949Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>http://www.tracy.store/archive/</loc>
+        <loc>https://tracy.pro/archive/</loc>
         <lastmod>2019-11-26T15:24:03.868Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>http://www.tracy.store/404.html</loc>
+        <loc>https://tracy.pro/404.html</loc>
         <lastmod>2019-08-16T12:43:34.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
