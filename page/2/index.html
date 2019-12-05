@@ -146,6 +146,13 @@
 
                         
                         <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -164,13 +171,6 @@
                         
                     
 
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
                         
                     
 
@@ -236,6 +236,48 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/article/Python解析pcap文件/">
+        <h2 class="post-title">
+            Python解析pcap文件
+        </h2>
+        <h3 class="post-subtitle">
+            Python如何解析pcap数据包
+        </h3>
+        <div class="post-content-preview">
+            
+需求：使用Python解析pcap数据包文件，获取基于TCP/IP的应用层协议类型。
+
+使用 dpkt 模块
+dpkt安装
+1pip install dpkt
+dpkt模块的使用方法，可以查看官网dpkt官网。
+了解pcap数据包，各层结构，如下图所示：
+
+我们要做的就是通过解析，知道应用层是哪一种协议。
+代码实现
+pcap样本文件
+如下图所示：
+
+里面有很多基于TCP/IP的协议，如SS......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 张嘉伟 on
+            2019-11-26
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Python" title="Python">Python</a>
+            
+        </div>
+    
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -330,9 +372,9 @@ etcd分布式锁实现原理：
         </p>
         <div class="tags">
             
-              <a href="/tags/#Golang" title="Golang">Golang</a>
-            
               <a href="/tags/#etcd" title="etcd">etcd</a>
+            
+              <a href="/tags/#Golang" title="Golang">Golang</a>
             
         </div>
     
@@ -384,7 +426,7 @@ etcd作为一个受到ZooKeeper与doozer启发而催生的项目，除了拥有�
         </h3>
         <div class="post-content-preview">
             花花与三猫的养猫日常 :给猫咪洗屁屁!
-(function(){var player = new DPlayer({"container":document.getElementById("dplayer0"),"theme":"#FADFA3","loop":true,"video":{"url":"https://vdse.bdstatic.com/c973beddb915910024b......
+(function(){var player = new DPlayer({"container":document.getElementById("dplayer2"),"theme":"#FADFA3","loop":true,"video":{"url":"https://vdse.bdstatic.com/c973beddb915910024b......
         </div>
     </a>
     
@@ -415,7 +457,7 @@ etcd作为一个受到ZooKeeper与doozer启发而催生的项目，除了拥有�
         </h3>
         <div class="post-content-preview">
             花花与三猫的养猫日常 :橘猫吃播开始吃海鲜了
-(function(){var player = new DPlayer({"container":document.getElementById("dplayer2"),"theme":"#FADFA3","loop":true,"video":{"url":"https://vdse.bdstatic.com/28fee90459ac36d5......
+(function(){var player = new DPlayer({"container":document.getElementById("dplayer3"),"theme":"#FADFA3","loop":true,"video":{"url":"https://vdse.bdstatic.com/28fee90459ac36d5......
         </div>
     </a>
     
@@ -535,36 +577,6 @@ Golang允许用户定义类型，比如常见的结构体就属于用户定义�
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/article/如何使用Golang监控你的程序/">
-        <h2 class="post-title">
-            如何使用Golang监控你的程序
-        </h2>
-        <h3 class="post-subtitle">
-            go语言中程序监控
-        </h3>
-        <div class="post-content-preview">
-            前记
-你是如何使用 Golang 日志监控你的应用程序的呢？Golang 没有异常，只有错误。因此你的第一印象可能就是开发 Golang 日志策略并不是一件简单的事情。不支持异常事实上并不是什么问题，异常在很多编程语言中已经失去了其异常性：它们过于被滥用以至于它们的作用都被忽视了。
-在进一步深入之前，我们首先会介绍 Golang 日志的基础，并讨论 Golang 日志标准、元数据意义、以及最......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 张嘉伟 on
-            2019-11-21
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Golang" title="Golang">Golang</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -575,6 +587,10 @@ Golang允许用户定义类型，比如常见的结构体就属于用户定义�
             <a href="/">&larr; Newer Posts</a>
         </li>
     
+    
+        <li class="next">
+            <a href="/page/3/">Older Posts &rarr;</a>
+        </li>
     
 </ul>
 
@@ -626,11 +642,11 @@ var search_path = "search.xml";
     <div class="tags">
         
             
-            <a href="/tags/#APT样本提取" title="APT样本提取" rel="1">APT样本提取</a>
+            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
             
         
             
-            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
+            <a href="/tags/#APT样本提取" title="APT样本提取" rel="1">APT样本提取</a>
             
         
             
@@ -646,6 +662,10 @@ var search_path = "search.xml";
             
         
             
+            <a href="/tags/#etcd" title="etcd" rel="3">etcd</a>
+            
+        
+            
             <a href="/tags/#Golang" title="Golang" rel="5">Golang</a>
             
         
@@ -654,7 +674,7 @@ var search_path = "search.xml";
             
         
             
-            <a href="/tags/#etcd" title="etcd" rel="3">etcd</a>
+            <a href="/tags/#make" title="make" rel="1">make</a>
             
         
             
@@ -662,11 +682,7 @@ var search_path = "search.xml";
             
         
             
-            <a href="/tags/#make" title="make" rel="1">make</a>
-            
-        
-            
-            <a href="/tags/#网络安全" title="网络安全" rel="1">网络安全</a>
+            <a href="/tags/#网络安全" title="网络安全" rel="2">网络安全</a>
             
         
             
@@ -760,6 +776,10 @@ var search_path = "search.xml";
     <ul>
       
         <li>
+          <a href="/article/安天蜜网捕获“利用ElasticSearch-Groovy漏洞进行门罗币-Dog-挖矿”事件分析/">安天蜜网捕获“利用ElasticSearch Groovy漏洞进行门罗币(Dog)挖矿”事件分析</a>
+        </li>
+      
+        <li>
           <a href="/article/安天每日安全简讯2019-12-05/">安天每日安全简讯2019-12-05</a>
         </li>
       
@@ -773,10 +793,6 @@ var search_path = "search.xml";
       
         <li>
           <a href="/article/使用go管理Makefile/">使用go管理Makefile</a>
-        </li>
-      
-        <li>
-          <a href="/article/花花与三猫CatLive-第三篇/">花花与三猫CatLive-第三篇</a>
         </li>
       
     </ul>
@@ -815,7 +831,7 @@ var search_path = "search.xml";
         
     <h5>归档</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">17</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">17</span></li></ul>
     </div>
 
         <hr>

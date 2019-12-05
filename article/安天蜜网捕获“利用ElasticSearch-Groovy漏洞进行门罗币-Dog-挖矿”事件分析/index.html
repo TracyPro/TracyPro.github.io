@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <meta name="baidu-site-verification" content="FxTItxHJ12" />
+
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          安天蜜网捕获“利用ElasticSearch Groovy漏洞进行门罗币(Dog)挖矿”事件分析 - 张嘉伟 | Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://tracy.pro/article/安天蜜网捕获“利用ElasticSearch-Groovy漏洞进行门罗币-Dog-挖矿”事件分析/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+    <!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('./home.png')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#网络安全" title="网络安全">网络安全</a>
+                            
+                        </div>
+                        <h1>安天蜜网捕获“利用ElasticSearch Groovy漏洞进行门罗币(Dog)挖矿”事件分析</h1>
+                        <h2 class="subheading">ES挖矿漏洞</h2>
+                        <span class="meta">
+                            Posted by 张嘉伟 on
+                            2019-12-05
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span id="busuanzi_container_page_pv">
+                                本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+                            </span>
+                        </span>
+                        
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">张嘉伟</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/photos/">Photos</a>
+                        </li>
+                        
+                    
+
+                        
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/videos/">Videos</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h3 id="概述">概述</h3>
+<p>2019年6月13日，安天蜜网捕获到利用CVE-2015-1427(ElasticSearch Groovy)远程命令执行漏洞的攻击行为。该漏洞原理是Elaticsearch将groovy作为脚本语言，并使用基于黑白名单的沙盒机制限制危险代码执行，但该机制不够严格，可以被绕过，从而导致出现远程代码执行的情况。安天对此次事件进行了详细的样本分析，并给出预防及修复建议。</p>
+<h3 id="具体分析">具体分析</h3>
+<h4 id="关键攻击载荷">关键攻击载荷</h4>
+<p>从攻击载荷来看，攻击者通过groovy作为脚本语言，向_search?pretty页面发送一段带有恶意链接为http://185.181.10.234/E5DB0E07C3D7BE80V520/init.sh的json脚本，进行恶意shell脚本下载，从而实现远程代码攻击，并进行挖矿行为<br>
+<img src="./img_1.jpg" alt=""><br>
+解密后核心代码：<br>
+<img src="./img_2.jpg" alt=""></p>
+<h4 id="样本分析">样本分析</h4>
+<h5 id="入侵脚本initsh分析">入侵脚本init.sh分析</h5>
+<p>攻击者通过http://185.181.10.234/E5DB0E07C3D7BE80V520/init.sh下载并执行恶意脚本init.sh来植入Dog挖矿程序，同时对主机进行扫描等一系列操作。<br>
+<img src="./img_3.jpg" alt=""><br>
+之后执行关闭防火墙、关闭selinux并释放占用的资源、杀掉其他与挖矿相关的进程、设置定时任务（每30分钟下载一次可执行文件<font color="#dd0000"><a href="http://update.sh" target="_blank" rel="noopener">update.sh</a></font>），获取ssh权限，进行iptables规则转发修改，同时清理相关操作历史、日志等操作。</p>
+<p>检查并杀死其他存在的挖矿进程：<br>
+<img src="./img_4.jpg" alt=""></p>
+<p>设置定时任务：<br>
+<img src="./img_5.jpg" alt=""></p>
+<p>恶意脚本下载地址、备份地址以及大小设置:<br>
+<img src="./img_6.jpg" alt=""></p>
+<p>清理相关日志、历史：<br>
+<img src="./img_7.jpg" alt=""></p>
+<p>在此过程中，脚本会检查sysupdate、networkservice 和sysguard这3个进程是否启动，如果没有则进行启动。</p>
+<p>当其中一个被kill掉后，调度文件重新启动:<br>
+<img src="./img_8.jpg" alt=""></p>
+<h5 id="样本分析sysguard-networkservice-sysupdate">样本分析sysguard、networkservice、sysupdate</h5>
+<p>三个样本为go语言编写并使用UPX加壳，对应的main_main函数结构分别如下：</p>
+<p>sysguard-main_main函数结构:<br>
+<img src="./img_9.jpg" alt=""></p>
+<p>networkservice-main_main函数结构:<br>
+<img src="./img_10.jpg" alt=""></p>
+<p>sysupdate-main函数函数结构:<br>
+<img src="./img_11.jpg" alt=""></p>
+<p>通过与之前捕获的systemctI样本对比发现，此次攻击分成挖矿、扫描、函数调用三个进程进行调度。并且在networkservice样本中发现了相关漏洞利用函数和扫描函数。</p>
+<p>networkservice扫描函数:<br>
+<img src="./img_12.jpg" alt=""><br>
+通过对比之前捕获的样本发现两次攻击手法类似，不同的是此次攻击是通过sysguard、networkservice（扫描）和sysupdate三个进程共同进行的。这也意味着，发现服务器被感染后要将这三个进程同时kill掉。</p>
+<h5 id="配置文件configjson">配置文件config.json</h5>
+<p>在下载的配置文件中，我们发现了多个矿池地址：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">矿池地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="http://xmr.f2pool.com:13531" target="_blank" rel="noopener">xmr.f2pool.com:13531</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://cryptonightr.in.nicehash.com:3375" target="_blank" rel="noopener">cryptonightr.in.nicehash.com:3375</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://cryptonightr.br.nicehash.com:3375" target="_blank" rel="noopener">cryptonightr.br.nicehash.com:3375</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://cryptonightr.hk.nicehash.com:3375" target="_blank" rel="noopener">cryptonightr.hk.nicehash.com:3375</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://cryptonightr.jp.nicehash.com:3375" target="_blank" rel="noopener">cryptonightr.jp.nicehash.com:3375</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://cryptonightr.usa.nicehash.com:3375" target="_blank" rel="noopener">cryptonightr.usa.nicehash.com:3375</a></td>
+</tr>
+</tbody>
+</table>
+<p>配置文件矿池字段：<br>
+<img src="./img_13.jpg" alt=""></p>
+<h3 id="受影响的服务及漏洞">受影响的服务及漏洞</h3>
+<table>
+<thead>
+<tr>
+<th>服务</th>
+<th>漏洞</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weblogic</td>
+<td>CVE-2017-10271</td>
+</tr>
+<tr>
+<td>Thinkphp5</td>
+<td>远程代码执行</td>
+</tr>
+<tr>
+<td>Spring Data Commons</td>
+<td>CVE-2018-1273</td>
+</tr>
+<tr>
+<td>Hadoop</td>
+<td>未授权访问</td>
+</tr>
+<tr>
+<td>ElasticSearch</td>
+<td>CVE-2014-3120  CVE-2015-1427</td>
+</tr>
+<tr>
+<td>Drupal</td>
+<td>CVE-2018-7600</td>
+</tr>
+<tr>
+<td>Redis</td>
+<td>未授权访问</td>
+</tr>
+<tr>
+<td>SQL Server</td>
+<td>弱密码</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ioc">IOC</h3>
+<p>攻击IP：</p>
+<table>
+<thead>
+<tr>
+<th>IP</th>
+<th>地理位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>132.145.186.243</td>
+<td>美国</td>
+</tr>
+<tr>
+<td>111.40.10.11</td>
+<td>中国-黑龙江­哈尔滨</td>
+</tr>
+<tr>
+<td>167.86.106.102</td>
+<td>美国-科罗拉多州-利特尔顿</td>
+</tr>
+<tr>
+<td>221.176.156.164</td>
+<td>中国-河南-开封</td>
+</tr>
+<tr>
+<td>185.181.10.234</td>
+<td>德国-黑森州-法兰克福</td>
+</tr>
+</tbody>
+</table>
+<p>URL：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="http://185.181.10.234/E5DB0E07C3D7BE80V520/config.json" target="_blank" rel="noopener">http://185.181.10.234/E5DB0E07C3D7BE80V520/config.json</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://185.181.10.234/E5DB0E07C3D7BE80V520/networkservice" target="_blank" rel="noopener">http://185.181.10.234/E5DB0E07C3D7BE80V520/networkservice</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://185.181.10.234/E5DB0E07C3D7BE80V520/sysguard" target="_blank" rel="noopener">http://185.181.10.234/E5DB0E07C3D7BE80V520/sysguard</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://185.181.10.234/E5DB0E07C3D7BE80V520/sysupdate" target="_blank" rel="noopener">http://185.181.10.234/E5DB0E07C3D7BE80V520/sysupdate</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://185.181.10.234/E5DB0E07C3D7BE80V520/update.sh" target="_blank" rel="noopener">http://185.181.10.234/E5DB0E07C3D7BE80V520/update.sh</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://de.gsearch.com.de/api/config.json" target="_blank" rel="noopener">https://de.gsearch.com.de/api/config.json</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://de.gsearch.com.de/api/networkservice" target="_blank" rel="noopener">https://de.gsearch.com.de/api/networkservice</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://de.gsearch.com.de/api/sysguard" target="_blank" rel="noopener">https://de.gsearch.com.de/api/sysguard</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://de.gsearch.com.de/api/sysupdate" target="_blank" rel="noopener">https://de.gsearch.com.de/api/sysupdate</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://de.gsearch.com.de/api/update.sh" target="_blank" rel="noopener">https://de.gsearch.com.de/api/update.sh</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://185.181.10.234/E5DB0E07C3D7BE80V520/init.sh" target="_blank" rel="noopener">http://185.181.10.234/E5DB0E07C3D7BE80V520/init.sh</a></td>
+</tr>
+</tbody>
+</table>
+<p>MD5：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">MD5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">09c3dbdb39e1437a40b5c22600b375ca</td>
+</tr>
+<tr>
+<td style="text-align:center">8e9957b496a745f5db09b0f963eba74e</td>
+</tr>
+<tr>
+<td style="text-align:center">c31038f977f766eeba8415f3ba2c242c</td>
+</tr>
+<tr>
+<td style="text-align:center">ff879d31ed80841482c27c90e2bfe268</td>
+</tr>
+<tr>
+<td style="text-align:center">1cc08560de0edb78a9c4a0f1ba664e5f</td>
+</tr>
+</tbody>
+</table>
+<h3 id="预防与修复建议">预防与修复建议</h3>
+<h4 id="预防建议">预防建议</h4>
+<ul>
+<li>
+<p>确保系统与应用程序及时下载更新为官方提供的最新补丁；</p>
+</li>
+<li>
+<p>禁止使用弱口令密码；</p>
+</li>
+<li>
+<p>定期检查服务器异常，如CPU持续占用高、磁盘异常情况；</p>
+</li>
+<li>
+<p>安装终端威胁安全防护产品–安天智甲终端防御系统。安天智甲终端防御系统可以为您量身定制专属安全基线，为您打造安全的内网环境；同时，文档安全保护功能、全网病毒定点清除功能、以及国产操作系统的安全防护功能更好的解决您遇到的安全问题，保护您的服务器。</p>
+</li>
+</ul>
+<h4 id="修复建议">修复建议</h4>
+<ul>
+<li>断网、备份重要的crontab，关闭或删除定时任务：systemctl stop crontab或 rm -rf /etc/cron.d/*；</li>
+<li>锁定crontab中的恶意文件；</li>
+<li>查看并杀掉病毒进程：同时杀掉sysguard、networkservice、sysupdate三个进程；</li>
+<li>删除病毒相关文件，确认无误后，重启服务器，安装漏洞补丁，并采用安天智甲终端防御系统进行预防和保护服务器的安全。</li>
+</ul>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/article/安天每日安全简讯2019-12-05/" data-toggle="tooltip" data-placement="top" title="安天每日安全简讯2019-12-05">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+                <br>
+
+                <!--分享-->
+                
+                    <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                    <!--  css & js -->
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!--分享-->
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#概述"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x6982;&#x8FF0;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#具体分析"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x5177;&#x4F53;&#x5206;&#x6790;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#关键攻击载荷"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">&#x5173;&#x952E;&#x653B;&#x51FB;&#x8F7D;&#x8377;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#样本分析"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">&#x6837;&#x672C;&#x5206;&#x6790;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#入侵脚本initsh分析"><span class="toc-nav-number">2.2.1.</span> <span class="toc-nav-text">&#x5165;&#x4FB5;&#x811A;&#x672C;init.sh&#x5206;&#x6790;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#样本分析sysguard-networkservice-sysupdate"><span class="toc-nav-number">2.2.2.</span> <span class="toc-nav-text">&#x6837;&#x672C;&#x5206;&#x6790;sysguard&#x3001;networkservice&#x3001;sysupdate</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#配置文件configjson"><span class="toc-nav-number">2.2.3.</span> <span class="toc-nav-text">&#x914D;&#x7F6E;&#x6587;&#x4EF6;config.json</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#受影响的服务及漏洞"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x670D;&#x52A1;&#x53CA;&#x6F0F;&#x6D1E;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ioc"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">IOC</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#预防与修复建议"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">&#x9884;&#x9632;&#x4E0E;&#x4FEE;&#x590D;&#x5EFA;&#x8BAE;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#预防建议"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">&#x9884;&#x9632;&#x5EFA;&#x8BAE;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#修复建议"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">&#x4FEE;&#x590D;&#x5EFA;&#x8BAE;</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">特色标签</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#网络安全" title="网络安全">网络安全</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>友情链接</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://www.ctolib.com/docs//sfile/the-way-to-go_ZH_CN/index.html" target="_blank">golang菜鸟教程</a></li>
+                    
+                        <li><a href="http://docscn.studygolang.com/" target="_blank">golang官网</a></li>
+                    
+                        <li><a href="https://www.kancloud.cn/hello123/beego/126087" target="_blank">beego教程</a></li>
+                    
+                        <li><a href="https://www.ctolib.com/docs//sfile/the-way-to-go_ZH_CN/index.html" target="_blank">golang入门指南</a></li>
+                    
+                        <li><a href="https://github.com/doczhcn/etcd" target="_blank">etcd中文资源</a></li>
+                    
+                        <li><a href="https://github.com/etcd-io/etcd/tree/master/clientv3" target="_blank">golang使用etcd</a></li>
+                    
+                        <li><a href="https://github.com/mongodb/mongo-go-driver" target="_blank">golang使用MongoDB</a></li>
+                    
+                        <li><a href="https://www.mongodb.org.cn/tutorial/" target="_blank">MongoDB中文教程</a></li>
+                    
+                        <li><a href="http://www.tracy.store/" target="_blank">golang+beego+MySQL博客</a></li>
+                    
+                </ul>
+                
+
+                
+<div id="gitment_title" class="gitment_title"></div>
+<div id="container" style="display:none"></div>
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+<script src="https://billts.site/js/gitment.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  const myTheme = {
+    render(state, instance) {
+      const container = document.createElement('div');
+      container.lang = "en-US";
+      container.className = 'gitment-container gitment-root-container';
+      container.appendChild(instance.renderHeader(state, instance));
+      container.appendChild(instance.renderEditor(state, instance));
+      container.appendChild(instance.renderComments(state, instance));
+      container.appendChild(instance.renderFooter(state, instance));
+      return container;
+    }
+  }
+
+  function showGitment() {
+    $("#gitment_title").attr("style", "display:none");
+    $("#container").attr("style", "").addClass("gitment_container");
+    var gitment = new Gitment({
+      id: decodeURI(window.location.pathname),
+      theme: myTheme,
+      owner: 'TracyPro',
+      repo: 'TracyPro.github.io',
+      oauth: {
+        client_id: '7efbf680ada61c7be014',
+        client_secret: '2849d29795ada92ac567d1cfc8dba892494c4a18'
+      }
+    });
+    gitment.render('container');
+  }
+
+  showGitment();
+</script>
+
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<script>
+    function createImgEventFullScreen() {
+        var imgs = $(".post-container").find("img");
+        console.log(imgs);
+        for (var i = 0; i < imgs.length; i++) {
+            // $(imgs[i]).click(createCover(imgs[i]));
+            imgs[i].onclick = function (e) {
+                var src = e.srcElement.currentSrc;
+                var _this = $(this);
+                console.log(_this);
+                createCover(src,_this);
+            }
+        }
+        function createCover(src,_this) {
+            console.log(_this);
+            console.log(src);
+            var cover = $("<div id='outerDiv'  style='position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:5;width:100%;height:100%;display:none;'><div id='innerDiv' style='position:absolute;'><img  id='bigImg' style='border:5px solid #fff;' src=''/></div></div>");
+            $("#outerDiv").remove();
+            $("body").append(cover);
+            imgShow("#outerDiv", "#innerDiv", "#bigImg", _this,src);
+
+        }
+    }
+    function imgShow(outerDiv, innerDiv, bigImg, _this,src) {
+        //var src = _this.attr("src"); //获取当前点击的common-img元素中的src属性
+        $(bigImg).attr("src", src); //设置#bigImg元素的src属性
+
+        /*获取当前点击图片的真实大小，并显示弹出层及大图*/
+        $("<img/>").attr("src", src).load(function () {
+            var windowW = $(window).width(); //获取当前窗口宽度
+            var windowH = $(window).height(); //获取当前窗口高度
+            var realWidth = this.width; //获取图片真实宽度
+            var realHeight = this.height; //获取图片真实高度
+            var imgWidth, imgHeight;
+            var scale = 0.8; //缩放尺寸，当图片真实宽度和高度大于窗口宽度和高度时进行缩放
+
+            if (realHeight > windowH * scale) { //判断图片高度
+                imgHeight = windowH * scale; //如大于窗口高度，图片高度进行缩放
+                imgWidth = imgHeight / realHeight * realWidth; //等比例缩放宽度
+                if (imgWidth > windowW * scale) { //如宽度仍大于窗口宽度
+                    imgWidth = windowW * scale; //再对宽度进行缩放
+                }
+            } else if (realWidth > windowW * scale) { //如图片高度合适，判断图片宽度
+                imgWidth = windowW * scale; //如大于窗口宽度，图片宽度进行缩放
+                imgHeight = imgWidth / realWidth * realHeight; //等比例缩放高度
+            } else { //如果图片真实高度和宽度都符合要求，高宽不变
+                imgWidth = realWidth;
+                imgHeight = realHeight;
+            }
+            $(bigImg).css("width", imgWidth); //以最终的宽度对图片缩放
+
+            var w = (windowW - imgWidth) / 2; //计算图片与窗口左边距
+            var h = (windowH - imgHeight) / 2; //计算图片与窗口上边距
+            $(innerDiv).css({ "top": h, "left": w }); //设置#innerDiv的top和left属性
+            //console.log('****')
+            $(outerDiv).fadeIn("fast"); //淡入显示#outerDiv
+        });
+
+        $(outerDiv).click(function () { //再次点击淡出消失弹出层
+            $(this).fadeOut("fast");
+        });
+    }
+    setTimeout(function () {
+        createImgEventFullScreen();
+    }, 1000)
+</script>
+
+<style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('代码复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+
+        if(result)$(this).text('复制成功')
+        else $(this).text('复制失败')
+
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('代码复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/u/6161631844?refer_flag=1005055010_&amp;is_all=1">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="/img/wechat_tracy.jpeg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="/img/qq_tracy.jpeg">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/TracyPro">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-center">
+                
+                    <!-- 不蒜子统计 -->
+                    <span id="busuanzi_container_site_uv" style='display:none'>
+                        本站访客数<span id="busuanzi_value_site_uv"></span>人
+                    </span>
+                
+                    Copyright &copy; 张嘉伟 2019 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="https://tracypro.github.io">张嘉伟</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=tracypro&repo=tracypro.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://tracy.pro/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'xxx';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+    <a id="rocket" href="#top" class=""></a>
+    <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+</body>
+
+</html>
