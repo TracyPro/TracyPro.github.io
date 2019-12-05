@@ -16,11 +16,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          安天蜜网捕获“利用ElasticSearch Groovy漏洞进行门罗币(Dog)挖矿”事件分析 - 张嘉伟 | Blog
+          Go语言常见数据结构实现原理之chan - 张嘉伟 | Blog
         
     </title>
 
-    <link rel="canonical" href="https://tracy.pro/article/安天蜜网捕获“利用ElasticSearch-Groovy漏洞进行门罗币-Dog-挖矿”事件分析/">
+    <link rel="canonical" href="https://tracy.pro/article/Go语言常见数据结构实现原理之chan/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -92,11 +92,13 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#网络安全" title="网络安全">网络安全</a>
+                              <a class="tag" href="/tags/#Golang" title="Golang">Golang</a>
+                            
+                              <a class="tag" href="/tags/#Channel" title="Channel">Channel</a>
                             
                         </div>
-                        <h1>安天蜜网捕获“利用ElasticSearch Groovy漏洞进行门罗币(Dog)挖矿”事件分析</h1>
-                        <h2 class="subheading">ES挖矿漏洞</h2>
+                        <h1>Go语言常见数据结构实现原理之chan</h1>
+                        <h2 class="subheading">chan底层实现原理</h2>
                         <span class="meta">
                             Posted by 张嘉伟 on
                             2019-12-05
@@ -245,239 +247,99 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3 id="概述">概述</h3>
-<p>2019年6月13日，安天蜜网捕获到利用CVE-2015-1427(ElasticSearch Groovy)远程命令执行漏洞的攻击行为。该漏洞原理是Elaticsearch将groovy作为脚本语言，并使用基于黑白名单的沙盒机制限制危险代码执行，但该机制不够严格，可以被绕过，从而导致出现远程代码执行的情况。安天对此次事件进行了详细的样本分析，并给出预防及修复建议。</p>
-<h3 id="具体分析">具体分析</h3>
-<h4 id="关键攻击载荷">关键攻击载荷</h4>
-<p>从攻击载荷来看，攻击者通过groovy作为脚本语言，向_search?pretty页面发送一段带有恶意链接为http://185.181.10.234/E5DB0E07C3D7BE80V520/init.sh的json脚本，进行恶意shell脚本下载，从而实现远程代码攻击，并进行挖矿行为<br>
-<img src="./img_1.jpg" alt=""><br>
-解密后核心代码：<br>
-<img src="./img_2.jpg" alt=""></p>
-<h4 id="样本分析">样本分析</h4>
-<h5 id="入侵脚本initsh分析">入侵脚本init.sh分析</h5>
-<p>攻击者通过http://185.181.10.234/E5DB0E07C3D7BE80V520/init.sh下载并执行恶意脚本init.sh来植入Dog挖矿程序，同时对主机进行扫描等一系列操作。<br>
-<img src="./img_3.jpg" alt=""><br>
-之后执行关闭防火墙、关闭selinux并释放占用的资源、杀掉其他与挖矿相关的进程、设置定时任务（每30分钟下载一次可执行文件<font color="#dd0000"><a href="http://update.sh" target="_blank" rel="noopener">update.sh</a></font>），获取ssh权限，进行iptables规则转发修改，同时清理相关操作历史、日志等操作。</p>
-<p>检查并杀死其他存在的挖矿进程：<br>
-<img src="./img_4.jpg" alt=""></p>
-<p>设置定时任务：<br>
-<img src="./img_5.jpg" alt=""></p>
-<p>恶意脚本下载地址、备份地址以及大小设置:<br>
-<img src="./img_6.jpg" alt=""></p>
-<p>清理相关日志、历史：<br>
-<img src="./img_7.jpg" alt=""></p>
-<p>在此过程中，脚本会检查sysupdate、networkservice 和sysguard这3个进程是否启动，如果没有则进行启动。</p>
-<p>当其中一个被kill掉后，调度文件重新启动:<br>
-<img src="./img_8.jpg" alt=""></p>
-<h5 id="样本分析sysguard-networkservice-sysupdate">样本分析sysguard、networkservice、sysupdate</h5>
-<p>三个样本为go语言编写并使用UPX加壳，对应的main_main函数结构分别如下：</p>
-<p>sysguard-main_main函数结构:<br>
-<img src="./img_9.jpg" alt=""></p>
-<p>networkservice-main_main函数结构:<br>
-<img src="./img_10.jpg" alt=""></p>
-<p>sysupdate-main函数函数结构:<br>
-<img src="./img_11.jpg" alt=""></p>
-<p>通过与之前捕获的systemctI样本对比发现，此次攻击分成挖矿、扫描、函数调用三个进程进行调度。并且在networkservice样本中发现了相关漏洞利用函数和扫描函数。</p>
-<p>networkservice扫描函数:<br>
-<img src="./img_12.jpg" alt=""><br>
-通过对比之前捕获的样本发现两次攻击手法类似，不同的是此次攻击是通过sysguard、networkservice（扫描）和sysupdate三个进程共同进行的。这也意味着，发现服务器被感染后要将这三个进程同时kill掉。</p>
-<h5 id="配置文件configjson">配置文件config.json</h5>
-<p>在下载的配置文件中，我们发现了多个矿池地址：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">矿池地址</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><a href="http://xmr.f2pool.com:13531" target="_blank" rel="noopener">xmr.f2pool.com:13531</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="http://cryptonightr.in.nicehash.com:3375" target="_blank" rel="noopener">cryptonightr.in.nicehash.com:3375</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="http://cryptonightr.br.nicehash.com:3375" target="_blank" rel="noopener">cryptonightr.br.nicehash.com:3375</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="http://cryptonightr.hk.nicehash.com:3375" target="_blank" rel="noopener">cryptonightr.hk.nicehash.com:3375</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="http://cryptonightr.jp.nicehash.com:3375" target="_blank" rel="noopener">cryptonightr.jp.nicehash.com:3375</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="http://cryptonightr.usa.nicehash.com:3375" target="_blank" rel="noopener">cryptonightr.usa.nicehash.com:3375</a></td>
-</tr>
-</tbody>
-</table>
-<p>配置文件矿池字段：<br>
-<img src="./img_13.jpg" alt=""></p>
-<h3 id="受影响的服务及漏洞">受影响的服务及漏洞</h3>
-<table>
-<thead>
-<tr>
-<th>服务</th>
-<th>漏洞</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Weblogic</td>
-<td>CVE-2017-10271</td>
-</tr>
-<tr>
-<td>Thinkphp5</td>
-<td>远程代码执行</td>
-</tr>
-<tr>
-<td>Spring Data Commons</td>
-<td>CVE-2018-1273</td>
-</tr>
-<tr>
-<td>Hadoop</td>
-<td>未授权访问</td>
-</tr>
-<tr>
-<td>ElasticSearch</td>
-<td>CVE-2014-3120  CVE-2015-1427</td>
-</tr>
-<tr>
-<td>Drupal</td>
-<td>CVE-2018-7600</td>
-</tr>
-<tr>
-<td>Redis</td>
-<td>未授权访问</td>
-</tr>
-<tr>
-<td>SQL Server</td>
-<td>弱密码</td>
-</tr>
-</tbody>
-</table>
-<h3 id="ioc">IOC</h3>
-<p>攻击IP：</p>
-<table>
-<thead>
-<tr>
-<th>IP</th>
-<th>地理位置</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>132.145.186.243</td>
-<td>美国</td>
-</tr>
-<tr>
-<td>111.40.10.11</td>
-<td>中国-黑龙江­哈尔滨</td>
-</tr>
-<tr>
-<td>167.86.106.102</td>
-<td>美国-科罗拉多州-利特尔顿</td>
-</tr>
-<tr>
-<td>221.176.156.164</td>
-<td>中国-河南-开封</td>
-</tr>
-<tr>
-<td>185.181.10.234</td>
-<td>德国-黑森州-法兰克福</td>
-</tr>
-</tbody>
-</table>
-<p>URL：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">URL</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center"><a href="http://185.181.10.234/E5DB0E07C3D7BE80V520/config.json" target="_blank" rel="noopener">http://185.181.10.234/E5DB0E07C3D7BE80V520/config.json</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="http://185.181.10.234/E5DB0E07C3D7BE80V520/networkservice" target="_blank" rel="noopener">http://185.181.10.234/E5DB0E07C3D7BE80V520/networkservice</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="http://185.181.10.234/E5DB0E07C3D7BE80V520/sysguard" target="_blank" rel="noopener">http://185.181.10.234/E5DB0E07C3D7BE80V520/sysguard</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="http://185.181.10.234/E5DB0E07C3D7BE80V520/sysupdate" target="_blank" rel="noopener">http://185.181.10.234/E5DB0E07C3D7BE80V520/sysupdate</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="http://185.181.10.234/E5DB0E07C3D7BE80V520/update.sh" target="_blank" rel="noopener">http://185.181.10.234/E5DB0E07C3D7BE80V520/update.sh</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="https://de.gsearch.com.de/api/config.json" target="_blank" rel="noopener">https://de.gsearch.com.de/api/config.json</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="https://de.gsearch.com.de/api/networkservice" target="_blank" rel="noopener">https://de.gsearch.com.de/api/networkservice</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="https://de.gsearch.com.de/api/sysguard" target="_blank" rel="noopener">https://de.gsearch.com.de/api/sysguard</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="https://de.gsearch.com.de/api/sysupdate" target="_blank" rel="noopener">https://de.gsearch.com.de/api/sysupdate</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="https://de.gsearch.com.de/api/update.sh" target="_blank" rel="noopener">https://de.gsearch.com.de/api/update.sh</a></td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="http://185.181.10.234/E5DB0E07C3D7BE80V520/init.sh" target="_blank" rel="noopener">http://185.181.10.234/E5DB0E07C3D7BE80V520/init.sh</a></td>
-</tr>
-</tbody>
-</table>
-<p>MD5：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">MD5</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">09c3dbdb39e1437a40b5c22600b375ca</td>
-</tr>
-<tr>
-<td style="text-align:center">8e9957b496a745f5db09b0f963eba74e</td>
-</tr>
-<tr>
-<td style="text-align:center">c31038f977f766eeba8415f3ba2c242c</td>
-</tr>
-<tr>
-<td style="text-align:center">ff879d31ed80841482c27c90e2bfe268</td>
-</tr>
-<tr>
-<td style="text-align:center">1cc08560de0edb78a9c4a0f1ba664e5f</td>
-</tr>
-</tbody>
-</table>
-<h3 id="预防与修复建议">预防与修复建议</h3>
-<h4 id="预防建议">预防建议</h4>
+                <h3 id="前言">前言</h3>
+<p>channel是Golang在语言层面提供的goroutine间的通信方式，比Unix管道更易用也更轻便。channel主要用于进程内各goroutine间通信，如果需要跨进程通信，建议使用分布式系统的方法来解决。本文从源码角度分析channel的实现机制。</p>
+<h3 id="chan数据结构">chan数据结构</h3>
+<p>src/runtime/chan.go:hchan定义了channel的数据结构：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> hchan <span class="keyword">struct</span> &#123;</span><br><span class="line">    qcount   <span class="keyword">uint</span>           <span class="comment">// 当前队列中剩余元素个数</span></span><br><span class="line">    dataqsiz <span class="keyword">uint</span>           <span class="comment">// 环形队列长度，即可以存放的元素个数</span></span><br><span class="line">    buf      unsafe.Pointer <span class="comment">// 环形队列指针</span></span><br><span class="line">    elemsize <span class="keyword">uint16</span>         <span class="comment">// 每个元素的大小</span></span><br><span class="line">    closed   <span class="keyword">uint32</span>            <span class="comment">// 标识关闭状态</span></span><br><span class="line">    elemtype *_type         <span class="comment">// 元素类型</span></span><br><span class="line">    sendx    <span class="keyword">uint</span>           <span class="comment">// 队列下标，指示元素写入时存放到队列中的位置</span></span><br><span class="line">    recvx    <span class="keyword">uint</span>           <span class="comment">// 队列下标，指示元素从队列的该位置读出</span></span><br><span class="line">    recvq    waitq          <span class="comment">// 等待读消息的goroutine队列</span></span><br><span class="line">    sendq    waitq          <span class="comment">// 等待写消息的goroutine队列</span></span><br><span class="line">    lock mutex              <span class="comment">// 互斥锁，chan不允许并发读写</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从数据结构可以看出channel由队列、类型信息、goroutine等待队列组成，下面分别说明其原理。</p>
+<h4 id="环形队列">环形队列</h4>
+<p>chan内部实现了一个环形队列作为其缓冲区，队列的长度是创建chan时指定的。下图展示了一个可缓存6个元素的channel示意图：<br>
+<img src="./img_1.png" alt=""></p>
 <ul>
-<li>
-<p>确保系统与应用程序及时下载更新为官方提供的最新补丁；</p>
-</li>
-<li>
-<p>禁止使用弱口令密码；</p>
-</li>
-<li>
-<p>定期检查服务器异常，如CPU持续占用高、磁盘异常情况；</p>
-</li>
-<li>
-<p>安装终端威胁安全防护产品–安天智甲终端防御系统。安天智甲终端防御系统可以为您量身定制专属安全基线，为您打造安全的内网环境；同时，文档安全保护功能、全网病毒定点清除功能、以及国产操作系统的安全防护功能更好的解决您遇到的安全问题，保护您的服务器。</p>
-</li>
+<li>dataqsiz指示了队列长度为6，即可缓存6个元素；</li>
+<li>buf指向队列的内存，队列中还剩余两个元素；</li>
+<li>qcount表示队列中还有两个元素；</li>
+<li>sendx指示后续写入的数据存储的位置，取值[0, 6)；</li>
+<li>recvx指示从该位置读取数据, 取值[0, 6)；</li>
 </ul>
-<h4 id="修复建议">修复建议</h4>
+<h4 id="等待队列">等待队列</h4>
+<p>从channel读数据，如果channel缓冲区为空或者没有缓冲区，当前goroutine会被阻塞。 向channel写数据，如果channel缓冲区已满或者没有缓冲区，当前goroutine会被阻塞。被阻塞的goroutine将会挂在channel的等待队列中：</p>
 <ul>
-<li>断网、备份重要的crontab，关闭或删除定时任务：systemctl stop crontab或 rm -rf /etc/cron.d/*；</li>
-<li>锁定crontab中的恶意文件；</li>
-<li>查看并杀掉病毒进程：同时杀掉sysguard、networkservice、sysupdate三个进程；</li>
-<li>删除病毒相关文件，确认无误后，重启服务器，安装漏洞补丁，并采用安天智甲终端防御系统进行预防和保护服务器的安全。</li>
+<li>因读阻塞的goroutine会被向channel写入数据的goroutine唤醒；</li>
+<li>因写阻塞的goroutine会被从channel读数据的goroutine唤醒；</li>
 </ul>
+<p>下图展示了一个没有缓冲区的channel，有几个goroutine阻塞等待读数据：<br>
+<img src="./img_2.png" alt=""></p>
+<blockquote>
+<p>注意，一般情况下recvq和sendq至少有一个为空。只有一个例外，那就是同一个goroutine使用select语句向channel一边写数据，一边读数据。</p>
+</blockquote>
+<h4 id="类型信息">类型信息</h4>
+<p>一个channel只能传递一种类型的值，类型信息存储在hchan数据结构中。</p>
+<ul>
+<li>elemtype代表类型，用于数据传递过程中的赋值；</li>
+<li>elemsize代表类型大小，用于在buf中定位元素位置。</li>
+</ul>
+<h4 id="锁">锁</h4>
+<p>一个channel同时仅允许被一个goroutine读写，为简单起见，本章后续部分说明读写过程时不再涉及加锁和解锁。</p>
+<h3 id="channel读写">channel读写</h3>
+<h4 id="创建channel">创建channel</h4>
+<p>创建channel的过程实际上是初始化hchan结构。其中类型信息和缓冲区长度由make语句传入，buf的大小则与元素大小和缓冲区长度共同决定。</p>
+<p>创建channel的伪代码如下所示：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">makechan</span><span class="params">(t *chantype, size <span class="keyword">int</span>)</span> *<span class="title">hchan</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> c *hchan</span><br><span class="line">    c = <span class="built_in">new</span>(hchan)</span><br><span class="line">    c.buf = malloc(元素类型大小*size)</span><br><span class="line">    c.elemsize = 元素类型大小</span><br><span class="line">    c.elemtype = 元素类型</span><br><span class="line">    c.dataqsiz = size</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> c</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="向channel写数据">向channel写数据</h4>
+<p>向一个channel中写数据简单过程如下：</p>
+<ol>
+<li>如果等待接收队列recvq不为空，说明缓冲区中没有数据或者没有缓冲区，此时直接从recvq取出G,并把数据写入，最后把该G唤醒，结束发送过程；</li>
+<li>如果缓冲区中有空余位置，将数据写入缓冲区，结束发送过程；</li>
+<li>如果缓冲区中没有空余位置，将待发送数据写入G，将当前G加入sendq，进入睡眠，等待被读goroutine唤醒；</li>
+</ol>
+<p>简单流程图如下：<br>
+<img src="./img_3.png" alt=""></p>
+<h4 id="从channel读数据">从channel读数据</h4>
+<p>从一个channel读数据简单过程如下：</p>
+<ol>
+<li>如果等待发送队列sendq不为空，且没有缓冲区，直接从sendq中取出G，把G中数据读出，最后把G唤醒，结束读取过程；</li>
+<li>如果等待发送队列sendq不为空，此时说明缓冲区已满，从缓冲区中首部读出数据，把G中数据写入缓冲区尾部，把G唤醒，结束读取过程；</li>
+<li>如果缓冲区中有数据，则从缓冲区取出数据，结束读取过程；</li>
+<li>将当前goroutine加入recvq，进入睡眠，等待被写goroutine唤醒；</li>
+</ol>
+<p>简单流程图如下：<br>
+<img src="./img_4.png" alt=""></p>
+<h4 id="关闭channel">关闭channel</h4>
+<p>关闭channel时会把recvq中的G全部唤醒，本该写入G的数据位置为nil。把sendq中的G全部唤醒，但这些G会panic。</p>
+<p>除此之外，panic出现的常见场景还有：</p>
+<ol>
+<li>关闭值为nil的channel</li>
+<li>关闭已经被关闭的channel</li>
+<li>向已经关闭的channel写数据</li>
+</ol>
+<h3 id="常见用法">常见用法</h3>
+<h4 id="单向channel">单向channel</h4>
+<p>顾名思义，单向channel指只能用于发送或接收数据，实际上也没有单向channel。</p>
+<p>我们知道channel可以通过参数传递，所谓单向channel只是对channel的一种使用限制，这跟C语言使用const修饰函数参数为只读是一个道理。</p>
+<ul>
+<li>func readChan(chanName &lt;-chan int)： 通过形参限定函数内部只能从channel中读取数据</li>
+<li>func writeChan(chanName chan&lt;- int)： 通过形参限定函数内部只能向channel中写入数据</li>
+</ul>
+<p>一个简单的示例程序如下：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">readChan</span><span class="params">(chanName &lt;-<span class="keyword">chan</span> <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    &lt;- chanName</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">writeChan</span><span class="params">(chanName <span class="keyword">chan</span>&lt;- <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    chanName &lt;- <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> mychan = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    writeChan(mychan)</span><br><span class="line">    readChan(mychan)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>mychan是个正常的channel，而readChan()参数限制了传入的channel只能用来读，writeChan()参数限制了传入的channel只能用来写。</p>
+<h4 id="select">select</h4>
+<p>使用select可以监控多channel，比如监控多个channel，当其中某一个channel有数据时，就从其读出数据。</p>
+<p>一个简单的示例程序如下：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">addNumberToChan</span><span class="params">(chanName <span class="keyword">chan</span> <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        chanName &lt;- <span class="number">1</span></span><br><span class="line">        time.Sleep(<span class="number">1</span> * time.Second)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> chan1 = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">10</span>)</span><br><span class="line">    <span class="keyword">var</span> chan2 = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">go</span> addNumberToChan(chan1)</span><br><span class="line">    <span class="keyword">go</span> addNumberToChan(chan2)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> e := &lt;- chan1 :</span><br><span class="line">            fmt.Printf(<span class="string">"Get element from chan1: %d\n"</span>, e)</span><br><span class="line">        <span class="keyword">case</span> e := &lt;- chan2 :</span><br><span class="line">            fmt.Printf(<span class="string">"Get element from chan2: %d\n"</span>, e)</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            fmt.Printf(<span class="string">"No element in chan1 and chan2.\n"</span>)</span><br><span class="line">            time.Sleep(<span class="number">1</span> * time.Second)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>程序中创建两个channel： chan1和chan2。函数addNumberToChan()函数会向两个channel中周期性写入数据。通过select可以监控两个channel，任意一个可读时就从其中读出数据。</p>
+<p>程序输出如下：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">D:\SourceCode\GoExpert\src&gt;<span class="keyword">go</span> run main.<span class="keyword">go</span></span><br><span class="line">Get element from chan1: <span class="number">1</span></span><br><span class="line">Get element from chan2: <span class="number">1</span></span><br><span class="line">No element in chan1 and chan2.</span><br><span class="line">Get element from chan2: <span class="number">1</span></span><br><span class="line">Get element from chan1: <span class="number">1</span></span><br><span class="line">No element in chan1 and chan2.</span><br><span class="line">Get element from chan2: <span class="number">1</span></span><br><span class="line">Get element from chan1: <span class="number">1</span></span><br><span class="line">No element in chan1 and chan2.</span><br></pre></td></tr></table></figure>
+<p>从输出可见，从channel中读出数据的顺序是随机的，事实上select语句的多个case执行顺序是随机的，关于select的实现原理会有专门章节分析。</p>
+<p>通过这个示例想说的是：select的case语句读channel不会阻塞，尽管channel中没有数据。这是由于case语句编译后调用读channel时会明确传入不阻塞的参数，此时读不到数据时不会将当前goroutine加入到等待队列，而是直接返回。</p>
+<h4 id="range">range</h4>
+<p>通过range可以持续从channel中读出数据，好像在遍历一个数组一样，当channel中没有数据时会阻塞当前goroutine，与读channel时阻塞处理机制一样。</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">chanRange</span><span class="params">(chanName <span class="keyword">chan</span> <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> e := <span class="keyword">range</span> chanName &#123;</span><br><span class="line">        fmt.Printf(<span class="string">"Get element from chan: %d\n"</span>, e)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：如果向此channel写数据的goroutine退出时，系统检测到这种情况后会panic，否则range将会永久阻塞。</p>
+</blockquote>
 
                 
 
@@ -485,13 +347,9 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/article/Go语言常见数据结构实现原理之chan/" data-toggle="tooltip" data-placement="top" title="Go语言常见数据结构实现原理之chan">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/article/安天每日安全简讯2019-12-05/" data-toggle="tooltip" data-placement="top" title="安天每日安全简讯2019-12-05">Next Post &rarr;</a>
+                            <a href="/article/安天蜜网捕获“利用ElasticSearch-Groovy漏洞进行门罗币-Dog-挖矿”事件分析/" data-toggle="tooltip" data-placement="top" title="安天蜜网捕获“利用ElasticSearch Groovy漏洞进行门罗币(Dog)挖矿”事件分析">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -529,7 +387,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#概述"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x6982;&#x8FF0;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#具体分析"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x5177;&#x4F53;&#x5206;&#x6790;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#关键攻击载荷"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">&#x5173;&#x952E;&#x653B;&#x51FB;&#x8F7D;&#x8377;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#样本分析"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">&#x6837;&#x672C;&#x5206;&#x6790;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#入侵脚本initsh分析"><span class="toc-nav-number">2.2.1.</span> <span class="toc-nav-text">&#x5165;&#x4FB5;&#x811A;&#x672C;init.sh&#x5206;&#x6790;</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#样本分析sysguard-networkservice-sysupdate"><span class="toc-nav-number">2.2.2.</span> <span class="toc-nav-text">&#x6837;&#x672C;&#x5206;&#x6790;sysguard&#x3001;networkservice&#x3001;sysupdate</span></a></li><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#配置文件configjson"><span class="toc-nav-number">2.2.3.</span> <span class="toc-nav-text">&#x914D;&#x7F6E;&#x6587;&#x4EF6;config.json</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#受影响的服务及漏洞"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x53D7;&#x5F71;&#x54CD;&#x7684;&#x670D;&#x52A1;&#x53CA;&#x6F0F;&#x6D1E;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ioc"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">IOC</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#预防与修复建议"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">&#x9884;&#x9632;&#x4E0E;&#x4FEE;&#x590D;&#x5EFA;&#x8BAE;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#预防建议"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">&#x9884;&#x9632;&#x5EFA;&#x8BAE;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#修复建议"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">&#x4FEE;&#x590D;&#x5EFA;&#x8BAE;</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x524D;&#x8A00;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#chan数据结构"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">chan&#x6570;&#x636E;&#x7ED3;&#x6784;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#环形队列"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">&#x73AF;&#x5F62;&#x961F;&#x5217;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#等待队列"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">&#x7B49;&#x5F85;&#x961F;&#x5217;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#类型信息"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">&#x7C7B;&#x578B;&#x4FE1;&#x606F;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#锁"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">&#x9501;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#channel读写"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">channel&#x8BFB;&#x5199;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#创建channel"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">&#x521B;&#x5EFA;channel</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#向channel写数据"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">&#x5411;channel&#x5199;&#x6570;&#x636E;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#从channel读数据"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">&#x4ECE;channel&#x8BFB;&#x6570;&#x636E;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#关闭channel"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">&#x5173;&#x95ED;channel</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#常见用法"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">&#x5E38;&#x89C1;&#x7528;&#x6CD5;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#单向channel"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">&#x5355;&#x5411;channel</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#select"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">select</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#range"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">range</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -551,7 +409,9 @@
                     <h5><a href="/tags/">特色标签</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#网络安全" title="网络安全">网络安全</a>
+                          <a class="tag" href="/tags/#Golang" title="Golang">Golang</a>
+                        
+                          <a class="tag" href="/tags/#Channel" title="Channel">Channel</a>
                         
                     </div>
                 </section>
