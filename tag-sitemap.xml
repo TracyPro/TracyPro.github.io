@@ -65,13 +65,6 @@
     </url>
 
     <url>
-        <loc>https://tracy.pro/tags/APT%E6%A0%B7%E6%9C%AC%E6%8F%90%E5%8F%96/</loc>
-        <lastmod>2019-12-02T10:29:19.593Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://tracy.pro/tags/CPU/</loc>
         <lastmod>2019-12-04T08:38:42.891Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -79,22 +72,29 @@
     </url>
 
     <url>
-        <loc>https://tracy.pro/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</loc>
-        <lastmod>2019-12-05T03:02:06.603Z</lastmod>
+        <loc>https://tracy.pro/tags/APT%E6%A0%B7%E6%9C%AC%E6%8F%90%E5%8F%96/</loc>
+        <lastmod>2019-12-05T06:25:18.145Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://tracy.pro/tags/Golang/</loc>
-        <lastmod>2019-12-05T05:11:12.749Z</lastmod>
+        <lastmod>2019-12-05T06:29:44.771Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://tracy.pro/tags/Channel/</loc>
-        <lastmod>2019-12-05T05:11:12.749Z</lastmod>
+        <lastmod>2019-12-05T06:29:44.771Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://tracy.pro/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</loc>
+        <lastmod>2019-12-05T06:30:06.363Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
