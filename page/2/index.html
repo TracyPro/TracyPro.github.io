@@ -154,16 +154,6 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                    
-
-                        
-                        <li>
                             <a href="/photos/">Photos</a>
                         </li>
                         
@@ -172,6 +162,16 @@
                         
                     
 
+                        
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
                         
                     
 
@@ -240,111 +240,32 @@
 
 <div class="post-preview">
 
-    <a href="/article/可以免费自学的10个编程网站/">
+    <a href="/article/Go语言常见数据结构实现原理之chan/">
         <h2 class="post-title">
             
-            可以免费自学的10个编程网站
+            Go语言常见数据结构实现原理之chan
         </h2>
         <h3 class="post-subtitle">
-            自学网站
+            chan底层实现原理
         </h3>
         <div class="post-content-preview">
-            
-编程学习,很多人包括一些企业家，和市场营销人员都认为学习编程对一个人走向成功十分有帮助。在过去的一年里，我一直在学习编程。它有助我成为一个更好的创业者，我甚至可以提供一些帮助，当我的团队需要解决一些 bug 的时候。
-现在，如果你想学编程的话，这 10个网站可以帮助你，它们都提供了免费的课程供你学习，因此你无需担心费用的问题。
-Codecademy
-其中，Codecademy 是最受欢迎的......
+            前言
+channel是Golang在语言层面提供的goroutine间的通信方式，比Unix管道更易用也更轻便。channel主要用于进程内各goroutine间通信，如果需要跨进程通信，建议使用分布式系统的方法来解决。本文从源码角度分析channel的实现机制。
+chan数据结构
+src/runtime/chan.go:hchan定义了channel的数据结构：
+1234567891011......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 张嘉伟 on
-            2019-11-26
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#编程" title="编程">编程</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/Python解析pcap文件/">
-        <h2 class="post-title">
-            
-            Python解析pcap文件
-        </h2>
-        <h3 class="post-subtitle">
-            Python如何解析pcap数据包
-        </h3>
-        <div class="post-content-preview">
-            
-需求：使用Python解析pcap数据包文件，获取基于TCP/IP的应用层协议类型。
-
-使用 dpkt 模块
-dpkt安装
-1pip install dpkt
-dpkt模块的使用方法，可以查看官网dpkt官网。
-了解pcap数据包，各层结构，如下图所示：
-
-我们要做的就是通过解析，知道应用层是哪一种协议。
-代码实现
-pcap样本文件
-如下图所示：
-
-里面有很多基于TCP/IP的协议，如SS......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 张嘉伟 on
-            2019-11-26
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Python" title="Python">Python</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/dep使用/">
-        <h2 class="post-title">
-            
-            dep使用
-        </h2>
-        <h3 class="post-subtitle">
-            dep依赖包管理
-        </h3>
-        <div class="post-content-preview">
-            dep简介
-dep是一个golang项目的包管理工具，一般只需要2-3个命令就可以将go依赖包自动下载并归档到vender的目录中。dep官网参考：https://github.com/golang/dep
-dep安装
-1go get -u github.com/golang/dep/cmd/dep
-dep使用
-进入到项目目录
-1cd /home/gopath/src/demo
-dep初始化......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 张嘉伟 on
-            2019-11-25
+            2019-12-05
         </p>
         <div class="tags">
             
               <a href="/tags/#Golang" title="Golang">Golang</a>
             
-              <a href="/tags/#dep" title="dep">dep</a>
+              <a href="/tags/#Channel" title="Channel">Channel</a>
             
         </div>
     
@@ -354,30 +275,27 @@ dep初始化......
 
 <div class="post-preview">
 
-    <a href="/article/etcd常用命令/">
+    <a href="/article/安天每日安全简讯2019-12-05/">
         <h2 class="post-title">
             
-            etcd常用命令
+            安天每日安全简讯2019-12-05
         </h2>
         <h3 class="post-subtitle">
-            etcdctl操作命令
+            每日安全简讯
         </h3>
         <div class="post-content-preview">
-            etcdctl介绍
-
-etcdctl是一个命令行的客户端，它提供了一下简洁的命令，可理解为命令工具集，可以方便我们在对服务进行测试或者手动修改数据库内容。etcdctl与其他xxxctl的命令原理及操作类似（例如kubectl，systemctl）。
-1用法：etcdctl \[global options\] command \[command options\]\[args…\]
-Etc......
+            恶意软件CallerSpy伪装成聊天程序窃取用户信息
+(function(){var player = new DPlayer({"container":document.getElementById("dplayer0"),"theme":"#FADFA3","loop":true,"video":{"url":"https://techrepublicvideo.cbsistatic.c......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 张嘉伟 on
-            2019-11-25
+            2019-12-05
         </p>
         <div class="tags">
             
-              <a href="/tags/#etcd" title="etcd">etcd</a>
+              <a href="/tags/#网络安全" title="网络安全">网络安全</a>
             
         </div>
     
@@ -387,32 +305,66 @@ Etc......
 
 <div class="post-preview">
 
-    <a href="/article/golang基于etcd实现分布式锁/">
+    <a href="/article/RISC和CISC科普/">
         <h2 class="post-title">
             
-            golang基于etcd实现分布式锁
+            RISC和CISC科普
         </h2>
         <h3 class="post-subtitle">
-            golang中使用etcd
+            两种CPU架构
         </h3>
         <div class="post-content-preview">
-            我们希望同一时间只有一个线程能够访问到资源，但是分布式资源点之间的协调会非常麻烦，这个时候我们就需要一个分布式锁。
-etcd分布式锁实现原理：
-1.利用租约在etcd集群中创建一个key，这个key有两种形态，存在和不存在，而这两种形态就是互斥量。
-2.如果这个key不存在，那么线程创建key，成功则获取到锁，该key就为存在状态。
-3.如果该key已经存在，那么线程就不能创建key，则获取......
+            
+RISC是英文Reduced Instruction Set Computer
+CISC是英文Complex Instruction Set Computer
+RISC（精简指令集计算机）和CISC（复杂指令集计算机）是当前CPU的两种架构。它们的区别在于不同的CPU设计理念和方法。
+
+CISC架构
+早期的CPU全部是CISC架构，它的设计目的是要用最少的机器语言指令来完成所需的计算任务。......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 张嘉伟 on
-            2019-11-24
+            2019-12-04
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#CPU" title="CPU">CPU</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/使用go管理Makefile/">
+        <h2 class="post-title">
+            
+            使用go管理Makefile
+        </h2>
+        <h3 class="post-subtitle">
+            golang编写Makefile
+        </h3>
+        <div class="post-content-preview">
+            简介
+很多时候， 我们需要运行多个命令来能完成一件事，又或者某个命令需要指定很多参数。这个时候，就需要使用脚本来取代这些复杂的命令，减少输错命令的可能，也可以为后来者指明常用的操作。
+Makefile
+Makefile就是为此而生的，相对于用途广泛的shell脚本，Makefile专注于构建自动化过程， 通常用于编译源码等。 很多项目都会提供Makefile文件，只需要简单地运行make 就......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 张嘉伟 on
+            2019-11-29
         </p>
         <div class="tags">
             
               <a href="/tags/#Golang" title="Golang">Golang</a>
             
-              <a href="/tags/#etcd" title="etcd">etcd</a>
+              <a href="/tags/#make" title="make">make</a>
             
         </div>
     
@@ -422,57 +374,23 @@ etcd分布式锁实现原理：
 
 <div class="post-preview">
 
-    <a href="/article/etcd应用场景/">
+    <a href="/article/花花与三猫CatLive-第三篇/">
         <h2 class="post-title">
             
-            etcd应用场景
+            花花与三猫CatLive-第三篇
         </h2>
         <h3 class="post-subtitle">
-            etcd使用
+            可爱的猫咪😚
         </h3>
         <div class="post-content-preview">
-            提到etcd很多人第一反应就是一个键值存储仓库。不过etcd官方文档的定义却是这样的：
-
-A highly-available key value store for shared configuration and service discovery.
-
-包含了配置共享和服务发现。
-etcd作为一个受到ZooKeeper与doozer启发而催生的项目，除了拥有与之类似的功能外，更专注于以下......
+            带家里胆最大的猫咪出门，以为可以遛弯儿，结果怂成一团！
+(function(){var player = new DPlayer({"container":document.getElementById("dplayer1"),"theme":"#FADFA3","loop":true,"video":{"url":"http://gslb.miaopai.com/stream/wssuU3......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 张嘉伟 on
-            2019-11-24
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#etcd" title="etcd">etcd</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/花花与三猫CatLive-第二篇/">
-        <h2 class="post-title">
-            
-            花花与三猫CatLive-第二篇
-        </h2>
-        <h3 class="post-subtitle">
-            可爱的猫咪😊
-        </h3>
-        <div class="post-content-preview">
-            花花与三猫的养猫日常 :给猫咪洗屁屁!
-(function(){var player = new DPlayer({"container":document.getElementById("dplayer2"),"theme":"#FADFA3","loop":true,"video":{"url":"https://vdse.bdstatic.com/c973beddb915910024b......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 张嘉伟 on
-            2019-11-23
+            2019-11-27
         </p>
         <div class="tags">
             
@@ -488,101 +406,29 @@ etcd作为一个受到ZooKeeper与doozer启发而催生的项目，除了拥有�
 
 <div class="post-preview">
 
-    <a href="/article/花花与三猫CatLive/">
+    <a href="/article/Docker-搭建MongoDB环境/">
         <h2 class="post-title">
             
-            花花与三猫CatLive-第一篇
+            Docker搭建MongoDB环境
         </h2>
         <h3 class="post-subtitle">
-            可爱的猫咪😊
+            Docker搭建MongoDB
         </h3>
         <div class="post-content-preview">
-            花花与三猫的养猫日常 :橘猫吃播开始吃海鲜了
-(function(){var player = new DPlayer({"container":document.getElementById("dplayer3"),"theme":"#FADFA3","loop":true,"video":{"url":"https://vdse.bdstatic.com/28fee90459ac36d5......
+            从DockerHUB下载MongoDB官方镜像
+1docker pull mongo
+运行镜像生成容器
+1234docker run -d -p 27017:27017 --name mongo -v /home/data/db:/data/db -d mongo --auth-p 27017:27017 端口映射-v /home/data/db:/data/db 通过卷挂载将MongoDB......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 张嘉伟 on
-            2019-11-23
+            2019-11-27
         </p>
         <div class="tags">
             
-              <a href="/tags/#猫咪" title="猫咪">猫咪</a>
-            
-              <a href="/tags/#短视频" title="短视频">短视频</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/Python与C混合编程遇到的问题/">
-        <h2 class="post-title">
-            
-            Python与C混合编程遇到的问题
-        </h2>
-        <h3 class="post-subtitle">
-            Python与C混合编程
-        </h3>
-        <div class="post-content-preview">
-            相互调用的方式选择
-在做项目时，调研过两种方式：一是扩展Python ctypes 类型；二是引入Python开发文件实现Python的扩展。
-扩展 ctypes 类型
-项目中遇到的第一个需要扩展的地方是，C/C++项目中用了C++ stl::vector。问题来了，在Python 的 ctypes 中没相关类型的封装呀，于是第一时间想到的是扩展 ctypes 类型。可是在实现的时候才发现这......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 张嘉伟 on
-            2019-11-21
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Python" title="Python">Python</a>
-            
-              <a href="/tags/#C/C++" title="C/C++">C/C++</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/如何实现C-C-与Python的通信？/">
-        <h2 class="post-title">
-            
-            如何实现C/C++与Python程序之间通信
-        </h2>
-        <h3 class="post-subtitle">
-            C/C++与Python通信
-        </h3>
-        <div class="post-content-preview">
-            属于混合编程的问题。较全面的介绍一下，不仅限于题主提出的问题。
-以下讨论中，Python指它的标准实现，即CPython（虽然不是很严格）
-本文结构
-
-C/C++ 调用 Python （基础篇）— 仅讨论Python官方提供的实现方式
-Python 调用 C/C++ （基础篇）— 仅讨论Python官方提供的实现方式
-C/C++ 调用 Python （高级篇）— 使用 Cython
-Pyth......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 张嘉伟 on
-            2019-11-21
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Python" title="Python">Python</a>
-            
-              <a href="/tags/#C/C++" title="C/C++">C/C++</a>
+              <a href="/tags/#Docker" title="Docker">Docker</a>
             
         </div>
     
@@ -655,11 +501,19 @@ var search_path = "search.xml";
     <div class="tags">
         
             
+            <a href="/tags/#APT样本提取" title="APT样本提取" rel="1">APT样本提取</a>
+            
+        
+            
             <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
             
         
             
-            <a href="/tags/#APT样本提取" title="APT样本提取" rel="1">APT样本提取</a>
+            <a href="/tags/#Golang" title="Golang" rel="8">Golang</a>
+            
+        
+            
+            <a href="/tags/#Map" title="Map" rel="1">Map</a>
             
         
             
@@ -672,10 +526,6 @@ var search_path = "search.xml";
         
             
             <a href="/tags/#CPU" title="CPU" rel="1">CPU</a>
-            
-        
-            
-            <a href="/tags/#Golang" title="Golang" rel="6">Golang</a>
             
         
             
@@ -695,7 +545,7 @@ var search_path = "search.xml";
             
         
             
-            <a href="/tags/#网络安全" title="网络安全" rel="2">网络安全</a>
+            <a href="/tags/#网络安全" title="网络安全" rel="4">网络安全</a>
             
         
             
@@ -708,6 +558,18 @@ var search_path = "search.xml";
         
             
             <a href="/tags/#Channel" title="Channel" rel="1">Channel</a>
+            
+        
+            
+            <a href="/tags/#Slice" title="Slice" rel="1">Slice</a>
+            
+        
+            
+            <a href="/tags/#海莲花" title="海莲花" rel="1">海莲花</a>
+            
+        
+            
+            <a href="/tags/#APT" title="APT" rel="1">APT</a>
             
         
     </div>
@@ -793,23 +655,23 @@ var search_path = "search.xml";
     <ul>
       
         <li>
+          <a href="/article/Go语言常见数据结构实现原理之map/">Go语言常见数据结构实现原理之map</a>
+        </li>
+      
+        <li>
+          <a href="/article/Go语言常见数据结构实现原理之slice/">Go语言常见数据结构实现原理之slice</a>
+        </li>
+      
+        <li>
+          <a href="/article/黑客常用端口利用总结/">黑客常用端口利用总结</a>
+        </li>
+      
+        <li>
+          <a href="/article/海莲花”-OceanLotus-组织2019年针对中国大陆的攻击活动汇总/">海莲花”(OceanLotus)组织2019年针对中国大陆的攻击活动汇总</a>
+        </li>
+      
+        <li>
           <a href="/article/Go语言常见数据结构实现原理之chan/">Go语言常见数据结构实现原理之chan</a>
-        </li>
-      
-        <li>
-          <a href="/article/安天蜜网捕获“利用ElasticSearch-Groovy漏洞进行门罗币-Dog-挖矿”事件分析/">安天蜜网捕获“利用ElasticSearch Groovy漏洞进行门罗币(Dog)挖矿”事件分析</a>
-        </li>
-      
-        <li>
-          <a href="/article/安天每日安全简讯2019-12-05/">安天每日安全简讯2019-12-05</a>
-        </li>
-      
-        <li>
-          <a href="/article/RISC和CISC科普/">RISC和CISC科普</a>
-        </li>
-      
-        <li>
-          <a href="/article/APT恶意软件分析之从WORD中提取EXE技术/">APT恶意软件分析之从WORD中提取EXE技术</a>
         </li>
       
     </ul>
@@ -848,7 +710,7 @@ var search_path = "search.xml";
         
     <h5>归档</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">17</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">17</span></li></ul>
     </div>
 
         <hr>
