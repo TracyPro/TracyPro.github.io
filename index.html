@@ -140,21 +140,7 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -167,8 +153,22 @@
                     
 
                         
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
                     
 
+                        
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
                         
                     
 
@@ -273,6 +273,83 @@
               <a href="/tags/#海莲花" title="海莲花">海莲花</a>
             
               <a href="/tags/#APT" title="APT">APT</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/黑客常用端口利用总结/">
+        <h2 class="post-title">
+            
+                <i class="fa fa-thumb-tack" style="color:#F4711F" ></i>
+                <!-- <i class="fa fa-thumb-tack" style="color:#F89E8C" ></i> -->
+                <!-- <i class="fa fa-thumb-tack" style="color:#1CB7ED" ></i> -->
+                <font color=#F4711F>置顶</font>
+                <!-- <font color=#F89E8C>置顶</font>  -->
+                <!-- <font color=#1CB7ED>置顶</font>  -->
+            
+            黑客常用端口利用总结
+        </h2>
+        <h3 class="post-subtitle">
+            易受攻击端口
+        </h3>
+        <div class="post-content-preview">
+            常见端口对应服务和被入侵方式
+
+
+
+端口
+服务
+入侵方式
+
+
+
+
+21
+ftp/tftp/vsftpd文件传输协议
+爆破/嗅探/溢出/后门
+
+
+22
+ssh远程连接
+爆破/openssh漏洞
+
+
+23
+Telnet远程连接
+爆破/嗅探/弱口令
+
+
+25
+SMTP邮件服务
+邮件伪造
+
+
+53
+DNS域名解析系统
+域传送/劫持/缓存投毒/欺骗
+
+
+67/68
+dhcp服务
+劫持/欺骗
+
+
+110......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 张嘉伟 on
+            2019-12-06
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#网络安全" title="网络安全">网络安全</a>
             
         </div>
     
@@ -562,39 +639,6 @@ Makefile就是为此而生的，相对于用途广泛的shell脚本，Makefile�
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/article/Docker教程/">
-        <h2 class="post-title">
-            
-            Docker教程
-        </h2>
-        <h3 class="post-subtitle">
-            Docker系列教程
-        </h3>
-        <div class="post-content-preview">
-            跟我学 Docker：企业级私有仓库 harbor（十七）完结篇
-https://www.sudo.ren/article/22?t=1567387069929
-跟我学 Docker：跨主机容器间通信之 overlay（十六）
-https://www.sudo.ren/article/21?t=1567387061602
-跟我学 Docker：docker 跨主机通信之 macvlan（十五......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 张嘉伟 on
-            2019-11-27
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Docker" title="Docker">Docker</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -676,15 +720,15 @@ var search_path = "search.xml";
             
         
             
+            <a href="/tags/#etcd" title="etcd" rel="3">etcd</a>
+            
+        
+            
             <a href="/tags/#Golang" title="Golang" rel="6">Golang</a>
             
         
             
             <a href="/tags/#dep" title="dep" rel="1">dep</a>
-            
-        
-            
-            <a href="/tags/#etcd" title="etcd" rel="3">etcd</a>
             
         
             
@@ -696,7 +740,7 @@ var search_path = "search.xml";
             
         
             
-            <a href="/tags/#网络安全" title="网络安全" rel="3">网络安全</a>
+            <a href="/tags/#网络安全" title="网络安全" rel="4">网络安全</a>
             
         
             
@@ -708,15 +752,15 @@ var search_path = "search.xml";
             
         
             
+            <a href="/tags/#Channel" title="Channel" rel="1">Channel</a>
+            
+        
+            
             <a href="/tags/#海莲花" title="海莲花" rel="1">海莲花</a>
             
         
             
             <a href="/tags/#APT" title="APT" rel="1">APT</a>
-            
-        
-            
-            <a href="/tags/#Channel" title="Channel" rel="1">Channel</a>
             
         
     </div>
@@ -802,6 +846,10 @@ var search_path = "search.xml";
     <ul>
       
         <li>
+          <a href="/article/黑客常用端口利用总结/">黑客常用端口利用总结</a>
+        </li>
+      
+        <li>
           <a href="/article/海莲花”-OceanLotus-组织2019年针对中国大陆的攻击活动汇总/">海莲花”(OceanLotus)组织2019年针对中国大陆的攻击活动汇总</a>
         </li>
       
@@ -815,10 +863,6 @@ var search_path = "search.xml";
       
         <li>
           <a href="/article/安天每日安全简讯2019-12-05/">安天每日安全简讯2019-12-05</a>
-        </li>
-      
-        <li>
-          <a href="/article/RISC和CISC科普/">RISC和CISC科普</a>
         </li>
       
     </ul>
@@ -857,7 +901,7 @@ var search_path = "search.xml";
         
     <h5>归档</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">17</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">17</span></li></ul>
     </div>
 
         <hr>
