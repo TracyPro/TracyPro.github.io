@@ -153,18 +153,18 @@
                     
 
                         
+                    
+
+                        
+                    
+
+                        
+                    
+
+                        
                         <li>
                             <a href="/photos/">Photos</a>
                         </li>
-                        
-                    
-
-                        
-                    
-
-                        
-                    
-
                         
                     
 
@@ -237,6 +237,44 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/article/Go语言常见数据结构实现原理之slice/">
+        <h2 class="post-title">
+            
+            Go语言常见数据结构实现原理之slice
+        </h2>
+        <h3 class="post-subtitle">
+            slice底层实现原理
+        </h3>
+        <div class="post-content-preview">
+            前言
+Slice又称动态数组，依托数组实现，可以方便的进行扩容、传递等，实际使用中比数组更灵活。
+正因为灵活，如果不了解其内部实现机制，有可能遭遇莫名的异常现象。Slice的实现原理很简单，本节试图根据真实的使用场景，在源码中总结实现原理。
+热身环节
+按照惯例，我们开始前先看几段代码用于检测对Slice的理解程度。
+题目一
+下面程序输出什么？
+123456789101112131415pac......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 张嘉伟 on
+            2019-12-06
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Golang" title="Golang">Golang</a>
+            
+              <a href="/tags/#Slice" title="Slice">Slice</a>
+            
+        </div>
+    
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -404,38 +442,6 @@ Makefile就是为此而生的，相对于用途广泛的shell脚本，Makefile�
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/article/Docker-搭建MongoDB环境/">
-        <h2 class="post-title">
-            
-            Docker搭建MongoDB环境
-        </h2>
-        <h3 class="post-subtitle">
-            Docker搭建MongoDB
-        </h3>
-        <div class="post-content-preview">
-            从DockerHUB下载MongoDB官方镜像
-1docker pull mongo
-运行镜像生成容器
-1234docker run -d -p 27017:27017 --name mongo -v /home/data/db:/data/db -d mongo --auth-p 27017:27017 端口映射-v /home/data/db:/data/db 通过卷挂载将MongoDB......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 张嘉伟 on
-            2019-11-27
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Docker" title="Docker">Docker</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -537,7 +543,11 @@ var search_path = "search.xml";
             
         
             
-            <a href="/tags/#编程" title="编程" rel="2">编程</a>
+            <a href="/tags/#网络安全" title="网络安全" rel="5">网络安全</a>
+            
+        
+            
+            <a href="/tags/#漏洞" title="漏洞" rel="1">漏洞</a>
             
         
             
@@ -545,7 +555,7 @@ var search_path = "search.xml";
             
         
             
-            <a href="/tags/#网络安全" title="网络安全" rel="4">网络安全</a>
+            <a href="/tags/#编程" title="编程" rel="2">编程</a>
             
         
             
@@ -655,6 +665,10 @@ var search_path = "search.xml";
     <ul>
       
         <li>
+          <a href="/article/何为文件包含漏洞？/">何为文件包含漏洞？</a>
+        </li>
+      
+        <li>
           <a href="/article/Go语言常见数据结构实现原理之map/">Go语言常见数据结构实现原理之map</a>
         </li>
       
@@ -668,10 +682,6 @@ var search_path = "search.xml";
       
         <li>
           <a href="/article/海莲花”-OceanLotus-组织2019年针对中国大陆的攻击活动汇总/">海莲花”(OceanLotus)组织2019年针对中国大陆的攻击活动汇总</a>
-        </li>
-      
-        <li>
-          <a href="/article/Go语言常见数据结构实现原理之chan/">Go语言常见数据结构实现原理之chan</a>
         </li>
       
     </ul>
@@ -710,7 +720,7 @@ var search_path = "search.xml";
         
     <h5>归档</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">17</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">17</span></li></ul>
     </div>
 
         <hr>

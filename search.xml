@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>何为文件包含漏洞？</title>
+      <link href="/article/%E4%BD%95%E4%B8%BA%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%EF%BC%9F/"/>
+      <url>/article/%E4%BD%95%E4%B8%BA%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%EF%BC%9F/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>文件包含，原本是将重复使用的函数写入单个文件中，供程序员自已或协同开发者调用，无需重复编写，增加程序的灵活性，提高开发效率。</p></blockquote><h3 id="前言">前言</h3><p>方便与安全永远是一把“双刃剑”，提供方便的同时，也为攻击者打开方便之门。攻击者利用文件包含漏洞，调用构造的恶意文件，达到攻击目的。</p><p>文件包含漏洞主要出现在脚本语言中，如jsp、asp、php等，但漏洞数量居多的是php web应用。</p><p>根据调用文件的位置，分为本地文件包含（LFI）和远程文件包含（RFI）。</p><blockquote><p>下面将介绍，促成该漏洞达到攻击目的几种途径。</p></blockquote><h3 id="上传兄伸出援手">“上传”兄伸出援手</h3><p>web应用存在文件包含漏洞，还存在上传、注入漏洞，利用后者，将够早的文件上传至服务器，利用前者进行调用，完成攻击。</p><h3 id="记录类文件的助力">记录类文件的助力</h3><p>1、包含access.log文件。Apache运行时，会生成两个文件：access.log（访问记录日志）和error.log（错误日志），前端访问URL中，我们可以写入php脚本，比如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.xxx.com/&lt;?php.phpinfo();?&gt;</span><br></pre></td></tr></table></figure><p>访问会报错，同时会将php内容写入到访问记录日志中，此时我们在前端再包含访问记录日志，就可以看到脚本被解析的结果了。</p><p>该方法利用难点：</p><ul><li>攻击者需要知道访问记录日志的存储路径。</li><li>脚本符号转义。“&lt;”和“&gt;”在URL访问时，可能会被后台转码。</li></ul><p>2、CVE-2018-12613。这个漏洞是在phpMyAdmin 4.8.0-4.8.1中存在，利用session文件记录，实现文件包含。请看示例：</p><p>写入语句，登录phpMyAdmin后，在sql一栏中写入下面语句：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="string">"&lt;?php phpinfo();?&gt;"</span></span><br></pre></td></tr></table></figure><p>执行效果如下图所示：<br><img src="./img_1.png" alt=""></p><p>取得session值。</p><p>访问session文件。在index.php后构造以下访问链接：</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index.php?target=db_sql.php%253f../../../../../../../../var/lib/php/sessions/sess_******</span><br></pre></td></tr></table></figure><p>其中“sess_”后面内容就是此次访问的session值。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 网络安全 </tag>
+            
+            <tag> 漏洞 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Go语言常见数据结构实现原理之map</title>
       <link href="/article/Go%E8%AF%AD%E8%A8%80%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E4%B9%8Bmap/"/>
       <url>/article/Go%E8%AF%AD%E8%A8%80%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E4%B9%8Bmap/</url>
