@@ -154,16 +154,6 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                    
-
-                        
-                        <li>
                             <a href="/photos/">Photos</a>
                         </li>
                         
@@ -172,6 +162,16 @@
                         
                     
 
+                        
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
                         
                     
 
@@ -237,6 +237,40 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/article/使用go管理Makefile/">
+        <h2 class="post-title">
+            
+            使用go管理Makefile
+        </h2>
+        <h3 class="post-subtitle">
+            golang编写Makefile
+        </h3>
+        <div class="post-content-preview">
+            简介
+很多时候， 我们需要运行多个命令来能完成一件事，又或者某个命令需要指定很多参数。这个时候，就需要使用脚本来取代这些复杂的命令，减少输错命令的可能，也可以为后来者指明常用的操作。
+Makefile
+Makefile就是为此而生的，相对于用途广泛的shell脚本，Makefile专注于构建自动化过程， 通常用于编译源码等。 很多项目都会提供Makefile文件，只需要简单地运行make 就......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 张嘉伟 on
+            2019-11-29
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Golang" title="Golang">Golang</a>
+            
+              <a href="/tags/#make" title="make">make</a>
+            
+        </div>
+    
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -550,40 +584,6 @@ etcd分布式锁实现原理：
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/article/etcd应用场景/">
-        <h2 class="post-title">
-            
-            etcd应用场景
-        </h2>
-        <h3 class="post-subtitle">
-            etcd使用
-        </h3>
-        <div class="post-content-preview">
-            提到etcd很多人第一反应就是一个键值存储仓库。不过etcd官方文档的定义却是这样的：
-
-A highly-available key value store for shared configuration and service discovery.
-
-包含了配置共享和服务发现。
-etcd作为一个受到ZooKeeper与doozer启发而催生的项目，除了拥有与之类似的功能外，更专注于以下......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 张嘉伟 on
-            2019-11-24
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#etcd" title="etcd">etcd</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -689,11 +689,15 @@ var search_path = "search.xml";
             
         
             
-            <a href="/tags/#make" title="make" rel="1">make</a>
+            <a href="/tags/#网络安全" title="网络安全" rel="5">网络安全</a>
             
         
             
-            <a href="/tags/#网络安全" title="网络安全" rel="4">网络安全</a>
+            <a href="/tags/#漏洞" title="漏洞" rel="1">漏洞</a>
+            
+        
+            
+            <a href="/tags/#make" title="make" rel="1">make</a>
             
         
             
@@ -803,6 +807,10 @@ var search_path = "search.xml";
     <ul>
       
         <li>
+          <a href="/article/何为文件包含漏洞？/">何为文件包含漏洞？</a>
+        </li>
+      
+        <li>
           <a href="/article/Go语言常见数据结构实现原理之map/">Go语言常见数据结构实现原理之map</a>
         </li>
       
@@ -816,10 +824,6 @@ var search_path = "search.xml";
       
         <li>
           <a href="/article/海莲花”-OceanLotus-组织2019年针对中国大陆的攻击活动汇总/">海莲花”(OceanLotus)组织2019年针对中国大陆的攻击活动汇总</a>
-        </li>
-      
-        <li>
-          <a href="/article/Go语言常见数据结构实现原理之chan/">Go语言常见数据结构实现原理之chan</a>
         </li>
       
     </ul>
@@ -858,7 +862,7 @@ var search_path = "search.xml";
         
     <h5>归档</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">17</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">17</span></li></ul>
     </div>
 
         <hr>
@@ -875,6 +879,36 @@ var search_path = "search.xml";
 	auto="https://music.163.com/#/playlist?id=360178146">
 </meting-js>
 </div>
+        <hr>
+    
+        <h5>网站运行</h5>
+<div id="days"></div>
+<script>
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("11/21/2019 11:13:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行 "+daysold+" 天 "+hrsold+" 小时 "+minsold+" 分 "+seconds+" 秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
         <hr>
     
 </div>
