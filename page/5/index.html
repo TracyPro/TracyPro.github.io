@@ -153,18 +153,18 @@
                     
 
                         
-                    
-
-                        
-                    
-
-                        
-                    
-
-                        
                         <li>
                             <a href="/photos/">Photos</a>
                         </li>
+                        
+                    
+
+                        
+                    
+
+                        
+                    
+
                         
                     
 
@@ -237,6 +237,40 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/article/Python与C混合编程遇到的问题/">
+        <h2 class="post-title">
+            
+            Python与C混合编程遇到的问题
+        </h2>
+        <h3 class="post-subtitle">
+            Python与C混合编程
+        </h3>
+        <div class="post-content-preview">
+            相互调用的方式选择
+在做项目时，调研过两种方式：一是扩展Python ctypes 类型；二是引入Python开发文件实现Python的扩展。
+扩展 ctypes 类型
+项目中遇到的第一个需要扩展的地方是，C/C++项目中用了C++ stl::vector。问题来了，在Python 的 ctypes 中没相关类型的封装呀，于是第一时间想到的是扩展 ctypes 类型。可是在实现的时候才发现这......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 张嘉伟 on
+            2019-11-21
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Python" title="Python">Python</a>
+            
+              <a href="/tags/#C/C++" title="C/C++">C/C++</a>
+            
+        </div>
+    
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -423,10 +457,6 @@ var search_path = "search.xml";
             
         
             
-            <a href="/tags/#CPU" title="CPU" rel="1">CPU</a>
-            
-        
-            
             <a href="/tags/#dep" title="dep" rel="1">dep</a>
             
         
@@ -435,11 +465,7 @@ var search_path = "search.xml";
             
         
             
-            <a href="/tags/#网络安全" title="网络安全" rel="5">网络安全</a>
-            
-        
-            
-            <a href="/tags/#漏洞" title="漏洞" rel="1">漏洞</a>
+            <a href="/tags/#CPU" title="CPU" rel="1">CPU</a>
             
         
             
@@ -451,11 +477,23 @@ var search_path = "search.xml";
             
         
             
+            <a href="/tags/#网络安全" title="网络安全" rel="5">网络安全</a>
+            
+        
+            
+            <a href="/tags/#漏洞" title="漏洞" rel="1">漏洞</a>
+            
+        
+            
             <a href="/tags/#猫咪" title="猫咪" rel="3">猫咪</a>
             
         
             
             <a href="/tags/#短视频" title="短视频" rel="3">短视频</a>
+            
+        
+            
+            <a href="/tags/#NBA" title="NBA" rel="1">NBA</a>
             
         
             
@@ -557,6 +595,10 @@ var search_path = "search.xml";
     <ul>
       
         <li>
+          <a href="/article/麦迪35秒狂得13分，从此麦迪时刻诞生！/">麦迪35秒狂得13分，从此麦迪时刻诞生！</a>
+        </li>
+      
+        <li>
           <a href="/article/何为文件包含漏洞？/">何为文件包含漏洞？</a>
         </li>
       
@@ -570,10 +612,6 @@ var search_path = "search.xml";
       
         <li>
           <a href="/article/黑客常用端口利用总结/">黑客常用端口利用总结</a>
-        </li>
-      
-        <li>
-          <a href="/article/海莲花”-OceanLotus-组织2019年针对中国大陆的攻击活动汇总/">海莲花”(OceanLotus)组织2019年针对中国大陆的攻击活动汇总</a>
         </li>
       
     </ul>
@@ -612,7 +650,7 @@ var search_path = "search.xml";
         
     <h5>归档</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">17</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a><span class="archive-list-count">17</span></li></ul>
     </div>
 
         <hr>
@@ -629,6 +667,36 @@ var search_path = "search.xml";
 	auto="https://music.163.com/#/playlist?id=360178146">
 </meting-js>
 </div>
+        <hr>
+    
+        <h5>网站运行</h5>
+<div id="days"></div>
+<script>
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("11/21/2019 11:13:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行 "+daysold+" 天 "+hrsold+" 小时 "+minsold+" 分 "+seconds+" 秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+
         <hr>
     
 </div>
