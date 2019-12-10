@@ -20,7 +20,7 @@
         
     </title>
 
-    <link rel="canonical" href="https://tracy.pro/page/5/">
+    <link rel="canonical" href="https://tracy.pro/archives/3/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -248,6 +248,139 @@
 
 <div class="post-preview">
 
+    <a href="/article/golang基于etcd实现分布式锁/">
+        <h2 class="post-title">
+            
+            golang基于etcd实现分布式锁
+        </h2>
+        <h3 class="post-subtitle">
+            golang中使用etcd
+        </h3>
+        <div class="post-content-preview">
+            我们希望同一时间只有一个线程能够访问到资源，但是分布式资源点之间的协调会非常麻烦，这个时候我们就需要一个分布式锁。
+etcd分布式锁实现原理：
+1.利用租约在etcd集群中创建一个key，这个key有两种形态，存在和不存在，而这两种形态就是互斥量。
+2.如果这个key不存在，那么线程创建key，成功则获取到锁，该key就为存在状态。
+3.如果该key已经存在，那么线程就不能创建key，则获取......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 张嘉伟 on
+            2019-11-24
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Golang" title="Golang">Golang</a>
+            
+              <a href="/tags/#etcd" title="etcd">etcd</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/etcd应用场景/">
+        <h2 class="post-title">
+            
+            etcd应用场景
+        </h2>
+        <h3 class="post-subtitle">
+            etcd使用
+        </h3>
+        <div class="post-content-preview">
+            提到etcd很多人第一反应就是一个键值存储仓库。不过etcd官方文档的定义却是这样的：
+
+A highly-available key value store for shared configuration and service discovery.
+
+包含了配置共享和服务发现。
+etcd作为一个受到ZooKeeper与doozer启发而催生的项目，除了拥有与之类似的功能外，更专注于以下......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 张嘉伟 on
+            2019-11-24
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#etcd" title="etcd">etcd</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/花花与三猫CatLive-第二篇/">
+        <h2 class="post-title">
+            
+            花花与三猫CatLive-第二篇
+        </h2>
+        <h3 class="post-subtitle">
+            可爱的猫咪😊
+        </h3>
+        <div class="post-content-preview">
+            花花与三猫的养猫日常 :给猫咪洗屁屁!
+(function(){var player = new DPlayer({"container":document.getElementById("dplayer2"),"theme":"#FADFA3","loop":true,"video":{"url":"https://vdse.bdstatic.com/c973beddb915910024b......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 张嘉伟 on
+            2019-11-23
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#猫咪" title="猫咪">猫咪</a>
+            
+              <a href="/tags/#短视频" title="短视频">短视频</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/花花与三猫CatLive/">
+        <h2 class="post-title">
+            
+            花花与三猫CatLive-第一篇
+        </h2>
+        <h3 class="post-subtitle">
+            可爱的猫咪😊
+        </h3>
+        <div class="post-content-preview">
+            花花与三猫的养猫日常 :橘猫吃播开始吃海鲜了
+(function(){var player = new DPlayer({"container":document.getElementById("dplayer3"),"theme":"#FADFA3","loop":true,"video":{"url":"https://vdse.bdstatic.com/28fee90459ac36d5......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 张嘉伟 on
+            2019-11-23
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#猫咪" title="猫咪">猫咪</a>
+            
+              <a href="/tags/#短视频" title="短视频">短视频</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/article/Python与C混合编程遇到的问题/">
         <h2 class="post-title">
             
@@ -387,7 +520,7 @@ Golang允许用户定义类型，比如常见的结构体就属于用户定义�
 <ul class="pager">
     
         <li class="previous">
-            <a href="/page/4/">&larr; Newer Posts</a>
+            <a href="/archives/2/">&larr; Newer Posts</a>
         </li>
     
     
@@ -481,15 +614,15 @@ var search_path = "search.xml";
             
         
             
+            <a href="/tags/#make" title="make" rel="1">make</a>
+            
+        
+            
             <a href="/tags/#网络安全" title="网络安全" rel="5">网络安全</a>
             
         
             
             <a href="/tags/#漏洞" title="漏洞" rel="1">漏洞</a>
-            
-        
-            
-            <a href="/tags/#make" title="make" rel="1">make</a>
             
         
             
@@ -510,6 +643,10 @@ var search_path = "search.xml";
         
             
             <a href="/tags/#Slice" title="Slice" rel="1">Slice</a>
+            
+        
+            
+            <a href="/tags/#海莲花" title="海莲花" rel="1">海莲花</a>
             
         
             
@@ -599,10 +736,6 @@ var search_path = "search.xml";
     <ul>
       
         <li>
-          <a href="/article/卡巴斯基：APT组织2019行为大盘点（上）/">卡巴斯基：APT组织2019行为大盘点（上）</a>
-        </li>
-      
-        <li>
           <a href="/article/麦迪35秒狂得13分，从此麦迪时刻诞生！/">麦迪35秒狂得13分，从此麦迪时刻诞生！</a>
         </li>
       
@@ -616,6 +749,10 @@ var search_path = "search.xml";
       
         <li>
           <a href="/article/Go语言常见数据结构实现原理之slice/">Go语言常见数据结构实现原理之slice</a>
+        </li>
+      
+        <li>
+          <a href="/article/黑客常用端口利用总结/">黑客常用端口利用总结</a>
         </li>
       
     </ul>
