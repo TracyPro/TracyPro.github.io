@@ -16,11 +16,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Photos - 张嘉伟 | Blog
+          张嘉伟 | Blog
         
     </title>
 
-    <link rel="canonical" href="https://tracy.pro/photos/">
+    <link rel="canonical" href="https://tracy.pro/archives/3/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -80,8 +80,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/img/header_img/home-bg.jpg')
-            /*page*/
+            background-image: url('/img/header_img/home.jpg') 
+            /*config*/
         
     }
     
@@ -99,9 +99,9 @@
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
                     <div class="site-heading">
-                        <h1>Photos</h1>
+                        <h1>张嘉伟</h1>
                         <!--<hr class="small">-->
-                        <span class="subheading">Hey, this is Photos.</span>
+                        <span class="subheading">个人博客</span>
                     </div>
                 
 
@@ -243,26 +243,325 @@
                 post-container
             ">
             
-                <script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-<link href="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.css" rel="stylesheet">
-<script src="https://cdn.bootcss.com/fancybox/3.5.7/jquery.fancybox.js"></script>
-<script src="//cdn.jsdelivr.net/npm/minigrid@3.1.1/dist/minigrid.min.js"></script>
-<script src="/photos/photo.js"></script>
-<link rel="stylesheet" type="text/css" href="./photo.css">
-<div class="ImageGrid"></div>
+                <!-- Main Content -->
+
+
+<div class="post-preview">
+
+    <a href="/article/etcd常用命令/">
+        <h2 class="post-title">
+            
+            etcd常用命令
+        </h2>
+        <h3 class="post-subtitle">
+            etcdctl操作命令
+        </h3>
+        <div class="post-content-preview">
+            etcdctl介绍
+
+etcdctl是一个命令行的客户端，它提供了一下简洁的命令，可理解为命令工具集，可以方便我们在对服务进行测试或者手动修改数据库内容。etcdctl与其他xxxctl的命令原理及操作类似（例如kubectl，systemctl）。
+1用法：etcdctl \[global options\] command \[command options\]\[args…\]
+Etc......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 张嘉伟 on
+            2019-11-25
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#etcd" title="etcd">etcd</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/golang基于etcd实现分布式锁/">
+        <h2 class="post-title">
+            
+            golang基于etcd实现分布式锁
+        </h2>
+        <h3 class="post-subtitle">
+            golang中使用etcd
+        </h3>
+        <div class="post-content-preview">
+            我们希望同一时间只有一个线程能够访问到资源，但是分布式资源点之间的协调会非常麻烦，这个时候我们就需要一个分布式锁。
+etcd分布式锁实现原理：
+1.利用租约在etcd集群中创建一个key，这个key有两种形态，存在和不存在，而这两种形态就是互斥量。
+2.如果这个key不存在，那么线程创建key，成功则获取到锁，该key就为存在状态。
+3.如果该key已经存在，那么线程就不能创建key，则获取......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 张嘉伟 on
+            2019-11-24
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Golang" title="Golang">Golang</a>
+            
+              <a href="/tags/#etcd" title="etcd">etcd</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/etcd应用场景/">
+        <h2 class="post-title">
+            
+            etcd应用场景
+        </h2>
+        <h3 class="post-subtitle">
+            etcd使用
+        </h3>
+        <div class="post-content-preview">
+            提到etcd很多人第一反应就是一个键值存储仓库。不过etcd官方文档的定义却是这样的：
+
+A highly-available key value store for shared configuration and service discovery.
+
+包含了配置共享和服务发现。
+etcd作为一个受到ZooKeeper与doozer启发而催生的项目，除了拥有与之类似的功能外，更专注于以下......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 张嘉伟 on
+            2019-11-24
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#etcd" title="etcd">etcd</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/花花与三猫CatLive/">
+        <h2 class="post-title">
+            
+            花花与三猫CatLive-第一篇
+        </h2>
+        <h3 class="post-subtitle">
+            可爱的猫咪😊
+        </h3>
+        <div class="post-content-preview">
+            花花与三猫的养猫日常 :橘猫吃播开始吃海鲜了
+(function(){var player = new DPlayer({"container":document.getElementById("dplayer3"),"theme":"#FADFA3","loop":true,"video":{"url":"https://vdse.bdstatic.com/28fee90459ac36d5......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 张嘉伟 on
+            2019-11-23
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#猫咪" title="猫咪">猫咪</a>
+            
+              <a href="/tags/#短视频" title="短视频">短视频</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/花花与三猫CatLive-第二篇/">
+        <h2 class="post-title">
+            
+            花花与三猫CatLive-第二篇
+        </h2>
+        <h3 class="post-subtitle">
+            可爱的猫咪😊
+        </h3>
+        <div class="post-content-preview">
+            花花与三猫的养猫日常 :给猫咪洗屁屁!
+(function(){var player = new DPlayer({"container":document.getElementById("dplayer2"),"theme":"#FADFA3","loop":true,"video":{"url":"https://vdse.bdstatic.com/c973beddb915910024b......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 张嘉伟 on
+            2019-11-23
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#猫咪" title="猫咪">猫咪</a>
+            
+              <a href="/tags/#短视频" title="短视频">短视频</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/Python与C混合编程遇到的问题/">
+        <h2 class="post-title">
+            
+            Python与C混合编程遇到的问题
+        </h2>
+        <h3 class="post-subtitle">
+            Python与C混合编程
+        </h3>
+        <div class="post-content-preview">
+            相互调用的方式选择
+在做项目时，调研过两种方式：一是扩展Python ctypes 类型；二是引入Python开发文件实现Python的扩展。
+扩展 ctypes 类型
+项目中遇到的第一个需要扩展的地方是，C/C++项目中用了C++ stl::vector。问题来了，在Python 的 ctypes 中没相关类型的封装呀，于是第一时间想到的是扩展 ctypes 类型。可是在实现的时候才发现这......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 张嘉伟 on
+            2019-11-21
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Python" title="Python">Python</a>
+            
+              <a href="/tags/#C/C++" title="C/C++">C/C++</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/如何实现C-C-与Python的通信？/">
+        <h2 class="post-title">
+            
+            如何实现C/C++与Python程序之间通信
+        </h2>
+        <h3 class="post-subtitle">
+            C/C++与Python通信
+        </h3>
+        <div class="post-content-preview">
+            属于混合编程的问题。较全面的介绍一下，不仅限于题主提出的问题。
+以下讨论中，Python指它的标准实现，即CPython（虽然不是很严格）
+本文结构
+
+C/C++ 调用 Python （基础篇）— 仅讨论Python官方提供的实现方式
+Python 调用 C/C++ （基础篇）— 仅讨论Python官方提供的实现方式
+C/C++ 调用 Python （高级篇）— 使用 Cython
+Pyth......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 张嘉伟 on
+            2019-11-21
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Python" title="Python">Python</a>
+            
+              <a href="/tags/#C/C++" title="C/C++">C/C++</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/golang方法/">
+        <h2 class="post-title">
+            
+            golang方法
+        </h2>
+        <h3 class="post-subtitle">
+            go语言方法使用
+        </h3>
+        <div class="post-content-preview">
+            Golang中的方法
+Golang允许用户定义类型，比如常见的结构体就属于用户定义的结构类型。方法可以给用户定义的类型添加新的行为，方法其实是一种特殊的函数，与函数的区别在于声明的时候在关键字func和函数名之间增加了一个参数。为了更好的理解方法的概念，我们先来看一段代码：
+12345678910111213141516171819202122232425262728293031323334......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 张嘉伟 on
+            2019-11-21
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Golang" title="Golang">Golang</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/如何使用Golang监控你的程序/">
+        <h2 class="post-title">
+            
+            如何使用Golang监控你的程序
+        </h2>
+        <h3 class="post-subtitle">
+            go语言中程序监控
+        </h3>
+        <div class="post-content-preview">
+            前记
+你是如何使用 Golang 日志监控你的应用程序的呢？Golang 没有异常，只有错误。因此你的第一印象可能就是开发 Golang 日志策略并不是一件简单的事情。不支持异常事实上并不是什么问题，异常在很多编程语言中已经失去了其异常性：它们过于被滥用以至于它们的作用都被忽视了。
+在进一步深入之前，我们首先会介绍 Golang 日志的基础，并讨论 Golang 日志标准、元数据意义、以及最......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 张嘉伟 on
+            2019-11-21
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#Golang" title="Golang">Golang</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+        <li class="previous">
+            <a href="/archives/2/">&larr; Newer Posts</a>
+        </li>
+    
+    
+</ul>
+
+
 
                 <!-- 如果开启评论功能 -->
-                
-                    <hr>
-
-                    
-
-                    
-
-
-                    
-
-                    
                 
             </div>
 
