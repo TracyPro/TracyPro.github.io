@@ -148,18 +148,8 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
-                        
-                    
-
                         
                     
 
@@ -177,15 +167,25 @@
                     
 
                         
+                    
+
+                        
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/videos/">Videos</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/videos/">Videos</a>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -518,143 +518,6 @@ https://malwr.com/analysis/MjQxOTQ5NWNjMGZlNGFiZmJkYzcwOTlkNDE3ZDdhZTU/
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/article/Go语言常见数据结构实现原理之map/">
-        <h2 class="post-title">
-            
-            Go语言常见数据结构实现原理之map
-        </h2>
-        <h3 class="post-subtitle">
-            map底层实现原理
-        </h3>
-        <div class="post-content-preview">
-            map数据结构
-Golang的map使用哈希表作为底层实现，一个哈希表里可以有多个哈希表节点，也即bucket，而每个bucket就保存了map中的一个或一组键值对。
-map数据结构由runtime/map.go/hmap定义:
-12345678type hmap struct &#123;    count     int // 当前保存的元素个数    ...    B         ......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 张嘉伟 on
-            2019-12-06
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Golang" title="Golang">Golang</a>
-            
-              <a href="/tags/#Map" title="Map">Map</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/Go语言常见数据结构实现原理之slice/">
-        <h2 class="post-title">
-            
-            Go语言常见数据结构实现原理之slice
-        </h2>
-        <h3 class="post-subtitle">
-            slice底层实现原理
-        </h3>
-        <div class="post-content-preview">
-            前言
-Slice又称动态数组，依托数组实现，可以方便的进行扩容、传递等，实际使用中比数组更灵活。
-正因为灵活，如果不了解其内部实现机制，有可能遭遇莫名的异常现象。Slice的实现原理很简单，本节试图根据真实的使用场景，在源码中总结实现原理。
-热身环节
-按照惯例，我们开始前先看几段代码用于检测对Slice的理解程度。
-题目一
-下面程序输出什么？
-123456789101112131415pac......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 张嘉伟 on
-            2019-12-06
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Golang" title="Golang">Golang</a>
-            
-              <a href="/tags/#Slice" title="Slice">Slice</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/Go语言常见数据结构实现原理之chan/">
-        <h2 class="post-title">
-            
-            Go语言常见数据结构实现原理之chan
-        </h2>
-        <h3 class="post-subtitle">
-            chan底层实现原理
-        </h3>
-        <div class="post-content-preview">
-            前言
-channel是Golang在语言层面提供的goroutine间的通信方式，比Unix管道更易用也更轻便。channel主要用于进程内各goroutine间通信，如果需要跨进程通信，建议使用分布式系统的方法来解决。本文从源码角度分析channel的实现机制。
-chan数据结构
-src/runtime/chan.go:hchan定义了channel的数据结构：
-1234567891011......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 张嘉伟 on
-            2019-12-05
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Golang" title="Golang">Golang</a>
-            
-              <a href="/tags/#Channel" title="Channel">Channel</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/安天每日安全简讯2019-12-05/">
-        <h2 class="post-title">
-            
-            安天每日安全简讯2019-12-05
-        </h2>
-        <h3 class="post-subtitle">
-            每日安全简讯
-        </h3>
-        <div class="post-content-preview">
-            恶意软件CallerSpy伪装成聊天程序窃取用户信息
-(function(){var player = new DPlayer({"container":document.getElementById("dplayer1"),"theme":"#FADFA3","loop":true,"video":{"url":"https://techrepublicvideo.cbsistatic.c......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 张嘉伟 on
-            2019-12-05
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#网络安全" title="网络安全">网络安全</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -663,7 +526,7 @@ src/runtime/chan.go:hchan定义了channel的数据结构：
     
     
         <li class="next">
-            <a href="/archives/2/">Older Posts &rarr;</a>
+            <a href="/page/2/">Older Posts &rarr;</a>
         </li>
     
 </ul>
@@ -716,11 +579,11 @@ var search_path = "search.xml";
     <div class="tags">
         
             
-            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
+            <a href="/tags/#APT样本提取" title="APT样本提取" rel="1">APT样本提取</a>
             
         
             
-            <a href="/tags/#APT样本提取" title="APT样本提取" rel="1">APT样本提取</a>
+            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
             
         
             
@@ -744,11 +607,15 @@ var search_path = "search.xml";
             
         
             
+            <a href="/tags/#dep" title="dep" rel="1">dep</a>
+            
+        
+            
             <a href="/tags/#etcd" title="etcd" rel="3">etcd</a>
             
         
             
-            <a href="/tags/#dep" title="dep" rel="1">dep</a>
+            <a href="/tags/#编程" title="编程" rel="2">编程</a>
             
         
             
@@ -757,10 +624,6 @@ var search_path = "search.xml";
         
             
             <a href="/tags/#漏洞" title="漏洞" rel="1">漏洞</a>
-            
-        
-            
-            <a href="/tags/#编程" title="编程" rel="2">编程</a>
             
         
             
