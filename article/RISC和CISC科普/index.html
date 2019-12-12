@@ -168,14 +168,8 @@
 
                         
                         <li>
-                            <a href="/photos/">Photos</a>
+                            <a href="/archive/">Archives</a>
                         </li>
-                        
-                    
-
-                        
-                    
-
                         
                     
 
@@ -184,8 +178,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/photos/">Photos</a>
                         </li>
+                        
+                    
+
+                        
+                    
+
                         
                     
 
@@ -410,7 +410,7 @@ RISC（精简指令集计算机）和CISC（复杂指令集计算机）是当前
     $("#gitment_title").attr("style", "display:none");
     $("#container").attr("style", "").addClass("gitment_container");
     var gitment = new Gitment({
-      id: decodeURI(window.location.pathname),
+      id: decodeURI(page.title),
       theme: myTheme,
       owner: 'TracyPro',
       repo: 'TracyPro.github.io',
