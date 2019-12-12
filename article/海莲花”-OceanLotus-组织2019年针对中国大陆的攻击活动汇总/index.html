@@ -172,6 +172,13 @@
 
                         
                         <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -190,13 +197,6 @@
                         
                     
 
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
                         
                     
 
@@ -999,7 +999,7 @@ Denis：<br>
     $("#gitment_title").attr("style", "display:none");
     $("#container").attr("style", "").addClass("gitment_container");
     var gitment = new Gitment({
-      id: '海莲花”(OceanLotus)组织2019年针对中国大陆的攻击活动汇总',
+      id: decodeURI(window.location.pathname),
       theme: myTheme,
       owner: 'TracyPro',
       repo: 'TracyPro.github.io',

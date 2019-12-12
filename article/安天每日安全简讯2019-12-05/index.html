@@ -168,6 +168,13 @@
 
                         
                         <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -186,13 +193,6 @@
                         
                     
 
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
                         
                     
 
@@ -433,7 +433,7 @@ Python安全团队从PyPI（Python软件包索引）中删除了两个木马化�
     $("#gitment_title").attr("style", "display:none");
     $("#container").attr("style", "").addClass("gitment_container");
     var gitment = new Gitment({
-      id: '安天每日安全简讯2019-12-05',
+      id: decodeURI(window.location.pathname),
       theme: myTheme,
       owner: 'TracyPro',
       repo: 'TracyPro.github.io',

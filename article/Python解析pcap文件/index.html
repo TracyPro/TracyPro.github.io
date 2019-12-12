@@ -168,6 +168,13 @@
 
                         
                         <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -186,13 +193,6 @@
                         
                     
 
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
                         
                     
 
@@ -424,7 +424,7 @@
     $("#gitment_title").attr("style", "display:none");
     $("#container").attr("style", "").addClass("gitment_container");
     var gitment = new Gitment({
-      id: 'Python解析pcap文件',
+      id: decodeURI(window.location.pathname),
       theme: myTheme,
       owner: 'TracyPro',
       repo: 'TracyPro.github.io',
