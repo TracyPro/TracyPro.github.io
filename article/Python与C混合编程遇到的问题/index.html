@@ -163,6 +163,13 @@
 
                         
                         <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
@@ -170,8 +177,11 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
+                        
+                    
+
                         
                     
 
@@ -185,16 +195,6 @@
                         
                     
 
-                        
-                    
-
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
                         
                     
 
@@ -293,7 +293,7 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/article/花花与三猫CatLive-第二篇/" data-toggle="tooltip" data-placement="top" title="花花与三猫CatLive-第二篇">&larr; Previous Post</a>
+                            <a href="/article/花花与三猫CatLive/" data-toggle="tooltip" data-placement="top" title="花花与三猫CatLive-第一篇">&larr; Previous Post</a>
                         </li>
                     
                     
@@ -430,7 +430,7 @@
     $("#gitment_title").attr("style", "display:none");
     $("#container").attr("style", "").addClass("gitment_container");
     var gitment = new Gitment({
-      id: decodeURI(),
+      id: decodeURI(window.location.pathname),
       theme: myTheme,
       owner: 'TracyPro',
       repo: 'TracyPro.github.io',
