@@ -165,6 +165,13 @@
 
                         
                         <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/photos/">Photos</a>
                         </li>
                         
@@ -176,13 +183,6 @@
                         
                     
 
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
                         
                     
 
@@ -520,11 +520,11 @@ var search_path = "search.xml";
     <div class="tags">
         
             
-            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
+            <a href="/tags/#APT样本提取" title="APT样本提取" rel="1">APT样本提取</a>
             
         
             
-            <a href="/tags/#APT样本提取" title="APT样本提取" rel="1">APT样本提取</a>
+            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
             
         
             
@@ -1034,7 +1034,7 @@ show_date_time();
             const strs = href.split('/');
             if (strs.length >= 3) {
                 const host = strs[2];
-                if (host !== 'your_domain' || window.location.host) {
+                if (host !== 'tracy.pro' || window.location.host) {
                     $this.attr('href', '/go.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
                     if (true) {
                         $this.attr('target', '_blank');
