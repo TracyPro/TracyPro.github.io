@@ -164,15 +164,18 @@
                     
 
                         
-                    
-
-                        
-                    
-
-                        
                         <li>
                             <a href="/photos/">Photos</a>
                         </li>
+                        
+                    
+
+                        
+                    
+
+                        
+                    
+
                         
                     
 
@@ -187,9 +190,6 @@
                         <li>
                             <a href="/videos/">Videos</a>
                         </li>
-                        
-                    
-
                         
                     
                     
@@ -747,14 +747,6 @@ var search_path = "search.xml";
             
         
             
-            <a href="/tags/#Python" title="Python" rel="3">Python</a>
-            
-        
-            
-            <a href="/tags/#C/C++" title="C/C++" rel="2">C/C++</a>
-            
-        
-            
             <a href="/tags/#Golang" title="Golang" rel="8">Golang</a>
             
         
@@ -763,7 +755,19 @@ var search_path = "search.xml";
             
         
             
+            <a href="/tags/#Python" title="Python" rel="3">Python</a>
+            
+        
+            
+            <a href="/tags/#C/C++" title="C/C++" rel="2">C/C++</a>
+            
+        
+            
             <a href="/tags/#CPU" title="CPU" rel="1">CPU</a>
+            
+        
+            
+            <a href="/tags/#dep" title="dep" rel="1">dep</a>
             
         
             
@@ -771,7 +775,7 @@ var search_path = "search.xml";
             
         
             
-            <a href="/tags/#dep" title="dep" rel="1">dep</a>
+            <a href="/tags/#编程" title="编程" rel="2">编程</a>
             
         
             
@@ -780,10 +784,6 @@ var search_path = "search.xml";
         
             
             <a href="/tags/#漏洞" title="漏洞" rel="1">漏洞</a>
-            
-        
-            
-            <a href="/tags/#编程" title="编程" rel="2">编程</a>
             
         
             
@@ -1243,6 +1243,25 @@ show_date_time();
     <script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
     <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
     <script type="text/javascript" src="/js/cheat.js" async=""></script>
-</body>
+
+        <script src="//cdn.jsdelivr.net/npm/js-base64/base64.min.js"></script>
+        <script>
+        $('a').each(function() {
+          const $this = $(this);
+          const href = $this.attr('href');
+          if (href && href.match('^((http|https|thunder|qqdl|ed2k|Flashget|qbrowser|ftp|rtsp|mms)://)')) {
+            const strs = href.split('/');
+            if (strs.length >= 3) {
+                const host = strs[2];
+                if (host !== 'your_domain' || window.location.host) {
+                    $this.attr('href', '/go.html?u='+Base64.encode(href)+'').attr('rel', 'external nofollow noopener noreferrer');
+                    if (true) {
+                        $this.attr('target', '_blank');
+                    }
+                }
+            }
+          }
+        });
+        </script></body>
 
 </html>
