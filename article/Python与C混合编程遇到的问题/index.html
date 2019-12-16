@@ -166,15 +166,24 @@
 
                         
                         <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                    
+
+                        
+                        <li>
                             <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
-                        <li>
-                            <a href="/archive/">Archives</a>
-                        </li>
+                    
+
                         
                     
 
@@ -182,15 +191,6 @@
                         <li>
                             <a href="/photos/">Photos</a>
                         </li>
-                        
-                    
-
-                        
-                    
-
-                        
-                    
-
                         
                     
 
@@ -296,7 +296,7 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/article/花花与三猫CatLive/" data-toggle="tooltip" data-placement="top" title="花花与三猫CatLive-第一篇">&larr; Previous Post</a>
+                            <a href="/article/花花与三猫CatLive-第二篇/" data-toggle="tooltip" data-placement="top" title="花花与三猫CatLive-第二篇">&larr; Previous Post</a>
                         </li>
                     
                     
@@ -409,44 +409,23 @@
                 </ul>
                 
 
-                
-<div id="gitment_title" class="gitment_title"></div>
-<div id="container" style="display:none"></div>
-<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
-<script src="https://billts.site/js/gitment.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script>
-  const myTheme = {
-    render(state, instance) {
-      const container = document.createElement('div');
-      container.lang = "en-US";
-      container.className = 'gitment-container gitment-root-container';
-      container.appendChild(instance.renderHeader(state, instance));
-      container.appendChild(instance.renderEditor(state, instance));
-      container.appendChild(instance.renderComments(state, instance));
-      container.appendChild(instance.renderFooter(state, instance));
-      return container;
-    }
-  }
-
-  function showGitment() {
-    $("#gitment_title").attr("style", "display:none");
-    $("#container").attr("style", "").addClass("gitment_container");
-    var gitment = new Gitment({
-      id: decodeURI(window.location.pathname),
-      theme: myTheme,
-      owner: 'TracyPro',
-      repo: 'TracyPro.github.io',
-      oauth: {
-        client_id: '7efbf680ada61c7be014',
-        client_secret: '2849d29795ada92ac567d1cfc8dba892494c4a18'
-      }
-    });
-    gitment.render('container');
-  }
-
-  showGitment();
-</script>
+ 
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <h5>文章评论</h5>
+    <div id="vcomments"></div>
+    <script>
+        new Valine({
+            el: '#vcomments',
+            appId: '0UKa7lmUg15st265HcKOfaB8-gzGzoHsz',
+            appKey: 'QQcH2dMipMFBokiGOPMSR5Fi',
+            notify:true, 
+            verify:true, 
+            avatar:'monsterid', 
+            placeholder: '我的小可爱🥰，想说点什么呢～' ,
+            paht: 'window.location.pathname',
+            visitor: true
+        })
+    </script>
 
             </div>
         </div>
@@ -630,6 +609,7 @@
       }).append(e)
     })
   </script>
+
 
 
     <!-- Footer -->
