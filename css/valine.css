@@ -15,3 +15,10 @@
   border-radius: 0px !important;
   padding: 0px !important;
 }
+
+.v .vlist .vcard .vimg:hover {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -transform: rotate(360deg);
+}
