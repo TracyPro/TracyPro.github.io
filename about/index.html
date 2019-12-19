@@ -164,12 +164,12 @@
                     
 
                         
-                    
-
-                        
                         <li>
                             <a href="/photos/">Photos</a>
                         </li>
+                        
+                    
+
                         
                     
 
@@ -246,16 +246,140 @@
                 post-container
             ">
             
-                <blockquote>
+                <h3 id="个人简介">个人简介</h3>
+<blockquote>
+<p>姓名：张嘉伟<br>
+年龄：25<br>
+技能：Golang、Python、恶意样本分析<br>
+爱好：篮球、猫咪、游戏、音乐、相声</p>
+</blockquote>
+<h3 id="我的偶像">我的偶像</h3>
+<p><img src="./tmac.jpg" alt=""></p>
+<h3 id="警示录">警示录</h3>
+<blockquote>
 <p>光有好奇心而不去实践，等于自愿放弃成功机会，<br>
-別为自己画地自限，Just Do It！！</p>
+別为自己画地自限，Just Do It！！<br>
+谨于言而慎于行。<br>
+永远保持第一天上班时的谨慎和认真,永远保持最后一天上班的尽力和完美。</p>
 </blockquote>
-<blockquote>
-<p>谨于言而慎于行。</p>
-</blockquote>
-<blockquote>
-<p>永远保持第一天上班时的谨慎和认真,永远保持最后一天上班的尽力和完美。</p>
-</blockquote>
+<h3 id="站点信息">站点信息</h3>
+<!-- echarts -->
+<script src="http://echarts.baidu.com/dist/echarts.common.min.js"></script>
+<div id="echarts5206" style="width: 100%;height: 500px;margin: 0 auto"></div>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts5206'));
+
+        // 指定图表的配置项和数据
+        var option =    option = {
+    title : {
+        text: '本站文章标签分类',
+        subtext: '基于本站',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+        data: ['Docker','APT样本提取','Golang','Python','Map','C/C++','CPU','dep','etcd','网络安全','漏洞','编程','make','猫咪','NBA','短视频','Channel','Slice','APT','海莲花']
+    },
+    series : [
+        {
+            name: '访问来源',
+            type: 'pie',
+            radius : '55%',
+            center: ['50%', '60%'],
+            data:[
+                {value:2, name:'Docker'},
+                {value:1, name:'APT样本提取'},
+                {value:8, name:'Golang'},
+                {value:3, name:'Python'},
+                {value:1, name:'Map'},
+                {value:2, name:'C/C++'},
+                {value:1, name:'CPU'},
+                {value:1, name:'dep'},
+                {value:3, name:'etcd'},
+                {value:5, name:'网络安全'},
+                {value:1, name:'漏洞'},
+                {value:2, name:'编程'},
+                {value:1, name:'make'},
+                {value:3, name:'猫咪'},
+                {value:1, name:'NBA'},
+                {value:3, name:'短视频'},
+                {value:1, name:'Channel'},
+                {value:1, name:'Slice'},
+                {value:1, name:'APT'},
+                {value:1, name:'海莲花'},
+
+            ],
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+<div id="echarts4739" style="width: 100%;height: 500px;margin: 0 auto"></div>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('echarts4739'));
+
+        // 指定图表的配置项和数据
+        var option = option = {
+    title: {
+        text: '本站文章归档统计',
+        subtext: '基于本站'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    legend: {
+        data: ['2019年', '2020年']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: {
+        type: 'value',
+        boundaryGap: [0, 0.01]
+    },
+    yAxis: {
+        type: 'category',
+        data: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+    },
+    series: [
+        {
+            name: '2019年',
+            type: 'bar',
+            data: [0,0,0,0,0,0,0,0,0,0,17,11]
+        },
+        {
+            name: '2020年',
+            type: 'bar',
+            data: [0,0,0,0,0,0,0,0,0,0,0,0]
+        }
+    ]
+};
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
 
 
                 <!-- 如果开启评论功能 -->
@@ -351,15 +475,15 @@ var search_path = "search.xml";
             
         
             
+            <a href="/tags/#编程" title="编程" rel="2">编程</a>
+            
+        
+            
             <a href="/tags/#网络安全" title="网络安全" rel="5">网络安全</a>
             
         
             
             <a href="/tags/#漏洞" title="漏洞" rel="1">漏洞</a>
-            
-        
-            
-            <a href="/tags/#编程" title="编程" rel="2">编程</a>
             
         
             
