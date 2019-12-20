@@ -16,13 +16,6 @@
     </url>
 
     <url>
-        <loc>https://tracy.pro/tags/dep/</loc>
-        <lastmod>2019-11-25T07:13:56.558Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://tracy.pro/tags/Python/</loc>
         <lastmod>2019-11-26T05:56:05.906Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -100,13 +93,6 @@
     </url>
 
     <url>
-        <loc>https://tracy.pro/tags/Golang/</loc>
-        <lastmod>2019-12-06T06:44:21.786Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://tracy.pro/tags/Map/</loc>
         <lastmod>2019-12-06T06:44:21.786Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -137,6 +123,20 @@
     <url>
         <loc>https://tracy.pro/tags/APT%E6%A0%B7%E6%9C%AC%E6%8F%90%E5%8F%96/</loc>
         <lastmod>2019-12-10T10:44:27.182Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://tracy.pro/tags/dep/</loc>
+        <lastmod>2019-12-20T07:27:42.342Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://tracy.pro/tags/Golang/</loc>
+        <lastmod>2019-12-20T07:50:59.737Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
